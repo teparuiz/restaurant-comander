@@ -1,10 +1,7 @@
 .button {
-    background-color: white;
-    padding: 100px;
-}
-
-.button button {
     margin: 100px;
     color: black;
     font-size: large;
+    justify-content: center;
+    align-items: center;
 }
