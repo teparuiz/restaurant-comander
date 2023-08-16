@@ -33,9 +33,11 @@ const Home = (props) => {
             </div>
 
             <div className="container col-4">
-              <button type="button" onClick={() => router.push("/orders")}>
-                <ButtonComander name="Usuario" icon="person" />
-              </button>
+              <ButtonComander
+                name="Usuario"
+                icon="person"
+                onClick={() => router.push("/orders")}
+              />
             </div>
           </div>
         </div>

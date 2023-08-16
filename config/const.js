@@ -15,3 +15,6 @@ export const burguers = [
         name: 'Cheese La Bichota', value: '05'
     },
 ]
+
+export const API='http://localhost:8000'
+export const API_LOCAL='http://localhost:8000'
