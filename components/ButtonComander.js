@@ -1,20 +1,24 @@
 import React from "react";
-
+import { Button, Space } from "antd";
 const ButtonComander = (props) => {
   const { name = "", onClick, icon = "" } = props;
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="container"
-      style={{ padding: "30px", background: "gray" }}
-    >
-      <div className="container align-items-center">
-        {name}
-        <i className="material-icons">{icon}</i>
-      </div>
-    </button>
+    <Space wrap>
+      <Button
+        type="primary"
+        onClick={onClick}
+        className="container"
+        size="large"
+      >
+        <div className="container align-items-center">
+          <i className="material-icons">{icon}</i>
+        </div>
+      </Button>
+     <div className="d-flex col">
+     {name}
+     </div>
+    </Space>
   );
 };
 

@@ -5,12 +5,13 @@ import { useOrder } from "../../context/orders-context";
 import { useRouter } from "next/router";
 import Select from "@teparuiz69/components/Select";
 import { burguers } from "@teparuiz69/config/const";
+import {Button as ButtonAntd, Space } from 'antd'
 const Orders = (props) => {
   const { getOrder, saveOrder } = useOrder();
   const router = useRouter();
   const [burguer, setBurguer] = useState("");
   const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(parseFloat(1));
 
   const _send = () => {
     const obj = {
@@ -21,7 +22,6 @@ const Orders = (props) => {
     onClose(obj);
   };
 
-  console.log(getOrder);
 
   const onClose = (reload) => {
     if (reload) saveOrder([...getOrder, reload]);
@@ -57,9 +57,11 @@ const Orders = (props) => {
               placeholder="escribe excepciones del pedido"
               type="text"
             />
-            <button onClick={() => _add(-1)} disabled={quantity <= 0}>
+           <div className="d-flex col align-items-center justify-content-center">
+           <Space wrap>
+           <ButtonAntd onClick={() => _add(-1)} disabled={quantity <= 0}>
               <i className="material-icons">remove</i>
-            </button>
+            </ButtonAntd>
 
             <Input
               name=""
@@ -67,9 +69,11 @@ const Orders = (props) => {
               onChange={setQuantity}
               type="number"
             />
-            <button onClick={() => _add(1)}>
+            <ButtonAntd onClick={() => _add(1)}>
               <i className="material-icons">add</i>
-            </button>
+            </ButtonAntd>
+           </Space>
+           </div>
           </div>
         </div>
 

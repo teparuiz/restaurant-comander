@@ -24,7 +24,7 @@ const Input = (props) => {
           type={type}
           value={value}
           onChange={_onChange}
-        />
+          />
       </label>
     </div>
   );
