@@ -4,19 +4,21 @@ import { Button } from "@teparuiz69/components/Button";
 import { HTTP } from "../../../config/http";
 const Login = (props) => {
   const [username, setUsername] = useState("");
-
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [data, setData] = useState("");
 
   const _send = () => {
-    HTTP("POST", "/", {
+    HTTP("POST", "/login", {
       username,
       password,
     })
-    .then((response) => {
-      console.log(response);
-    }).catch((err) => {
-      console.log(err);
-    });
+      .then((response) => {
+        setData(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="col-12">

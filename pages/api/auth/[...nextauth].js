@@ -13,29 +13,30 @@ export default NextAuth({
       provider: SessionProvider.Credentials,
       name: "credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: { label: "Username", type: "text", },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        try {
-          const result = await axios({
-            method: "POST",
-            url: `${process.env.NEXT_PUBLIC_API_LOCAL}/login`,
-            data: {
-              email: credentials.username,
-              password: credentials.password,
-            },
-          });
+      
+       async authorize(credentials) {
+         try {
+           const result = await axios({
+             method: "POST",
+             url: `${process.env.NEXT_PUBLIC_API_LOCAL}/login`,
+             data: {
+               email: credentials.username,
+               password: credentials.password,
+             },
+           });
 
-          return {
-            token: result.data.token,
-            accessToken: result.data.token,
-          };
-        } catch (e) {
-          // statements
-          throw new Error(JSON.stringify(e.response.data));
-        }
-      },
+           return {
+             token: result.data.token,
+             accessToken: result.data.token,
+           };
+         } catch (e) {
+            statements
+           throw new Error(JSON.stringify(e.response.data));
+         }
+       },
     },
   ],
   callbacks: {

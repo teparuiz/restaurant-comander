@@ -40,50 +40,49 @@ const ListOrder = (props) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const { businessId, s = "" } = context.query;
-  const session = await getSession(context);
-  let user;
-  if (!session)
-    return {
-      redirect: {
-        destination: "/account/login",
-        permanent: false,
-      },
-    };
-  try {
-    user = await HTTP("GET", "account", {}, session.accessToken);
-    if (validationSessionUser(user)) return validationSessionUser(user);
-  } catch (err) {
-    return validationSessionUser(err);
-  }
+// export async function getServerSideProps(context) {
+//   const { } = context.query;
+//   const session = await getSession(context);
+//   let user;
+//   if (!session)
+//     return {
+//       redirect: {
+//         destination: "/account/login",
+//         permanent: false,
+//       },
+//     };
+//   try {
+//     user = await HTTP("GET", '/list', {}, session.accessToken);
+//     if (validationSessionUser(user)) return validationSessionUser(user);
+//   } catch (err) {
+//     return validationSessionUser(err);
+//   }
+//   let data;
+//   try {
+//     data = await HTTP(
+//       "GET",
+//       `user/all`,
+//       { ...context.query },
+//       session?.accessToken
+//     );
+//   } catch (err) {
+//     return validationSessionUser(err);
+//   }
 
-  let data;
-  try {
-    data = await HTTP(
-      "GET",
-      `user/all`,
-      { ...context.query },
-      session?.accessToken
-    );
-  } catch (err) {
-    return validationSessionUser(err);
-  }
-
-  return {
-    props: {
-      session: session,
-      accessToken: session.accessToken,
-      layout: "admin",
-      user: user,
-      data: data,
-      params: {
-        ...context.query,
-        s,
-      },
-      rol: rol,
-    },
-  };
-}
+//   return {
+//     props: {
+//       session: session,
+//       accessToken: session.accessToken,
+//       layout: "admin",
+//       user: user,
+//       data: data,
+//       params: {
+//         ...context.query,
+//         s,
+//       },
+//       rol: rol,
+//     },
+//   };
+// }
 
 export default ListOrder;

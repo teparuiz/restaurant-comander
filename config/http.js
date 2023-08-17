@@ -16,31 +16,6 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
-export const getAddressGoogle = (lat, lng) => {
-  return new Promise((resolve, reject) => {
-    window.geocoder.geocode(
-      {
-        country: "MX",
-        location: {
-          lat,
-          lng,
-        },
-      },
-      (results, status) => {
-        if (status == "OK") {
-          const [first] = results;
-          return resolve(first);
-        } else
-          return reject({
-            error: true,
-            message: `Geocode was not successful for the following reason: ${status}`,
-            status: status,
-          });
-      }
-    );
-  });
-};
-
 export const HTTP = (
   method = "POST",
   url = "",
@@ -55,7 +30,7 @@ export const HTTP = (
         ...data,
       },
       headers: {
-        Authorization: accessToken,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
       .then(({ data }) => {
