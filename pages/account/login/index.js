@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import Input from "@teparuiz69/components/Input";
 import { Button } from "@teparuiz69/components/Button";
 import { HTTP } from "../../../config/http";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 const Login = (props) => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState("");
 
   const _send = () => {
-    HTTP("POST", "/login", {
-      username,
-      password,
-    })
-      .then((response) => {
+    signIn(
+      'credentials', {
+        username: username,
+        password: password,
+        redirect: false,
+        callbackUrl: '/',
+      
+      }
+    )     .then((response) => {
         setData(response);
       })
       .catch((err) => {
