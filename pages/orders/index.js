@@ -5,26 +5,30 @@ import { useOrder } from "../../context/orders-context";
 import { useRouter } from "next/router";
 import Select from "@teparuiz69/components/Select";
 import { burguers } from "@teparuiz69/config/const";
-import {Button as ButtonAntd, Space } from 'antd'
+import { Button as ButtonAntd, Space } from "antd";
 const Orders = (props) => {
   const { getOrder, saveOrder } = useOrder();
   const router = useRouter();
   const [burguer, setBurguer] = useState("");
-  const [description, setDescription] = useState("");
+  const [notes, setNotes] = useState("");
   const [quantity, setQuantity] = useState(parseFloat(1));
 
   const _send = () => {
     const obj = {
       burguer,
-      description,
+      notes,
       quantity,
     };
     onClose(obj);
   };
 
-
   const onClose = (reload) => {
-    if (reload) saveOrder([...getOrder, reload]);
+    if (reload) {
+      saveOrder([...getOrder, reload]);
+      setBurguer("-1");
+      setNotes("");
+      setQuantity(1);
+    }
   };
 
   const _goList = () => {
@@ -37,61 +41,63 @@ const Orders = (props) => {
   };
 
   return (
-    <div>
-      <div className="container-fluid h-custom justify-content-center">
-        <div className="row">
-          <div className="col-6">
-            <Select
-              name="Producto"
-              value={burguer}
-              onChange={setBurguer}
-              options={[
-                { name: "Selecciona una opción", value: -1, disabled: true },
-                ...burguers,
-              ]}
-            />
-            <Input
-              name="Descripción"
-              value={description}
-              onChange={setDescription}
-              placeholder="escribe excepciones del pedido"
-              type="text"
-            />
-           <div className="d-flex col align-items-center justify-content-center">
-           <Space wrap>
-           <ButtonAntd onClick={() => _add(-1)} disabled={quantity <= 0}>
-              <i className="material-icons">remove</i>
-            </ButtonAntd>
+    <div className="container">
+      <h1> Hacer pédido </h1>
+      <div className="text-center">
+        <div className="row d-flex mt-8 row align-items-center justify-content-center">
+          <div className="flex flex-col mb-2">
+            <div className="flex relative">
+              <Select
+                name="Producto"
+                value={burguer}
+                onChange={setBurguer}
+                options={[
+                  {
+                    name: "Selecciona una opción",
+                    value: -1,
+                    disabled: true,
+                  },
+                  ...burguers,
+                ]}
+              />
+              <Input
+                name="Notas"
+                value={notes}
+                onChange={setNotes}
+                placeholder="escribe excepciones del pedido"
+                type="text"
+              />
 
-            <Input
-              name=""
-              value={quantity}
-              onChange={setQuantity}
-              type="number"
-            />
-            <ButtonAntd onClick={() => _add(1)}>
-              <i className="material-icons">add</i>
-            </ButtonAntd>
-           </Space>
-           </div>
+              <Space wrap>
+                <ButtonAntd onClick={() => _add(-1)} disabled={quantity <= 0}>
+                  <i className="material-icons">remove</i>
+                </ButtonAntd>
+
+                <Input name="" value={quantity} onChange={setQuantity} />
+                <ButtonAntd onClick={() => _add(1)}>
+                  <i className="material-icons">add</i>
+                </ButtonAntd>
+              </Space>
+            </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col col-6">
-            <div className="d-flex justify-content-between">
-              <Button
-                name="Realizar orden"
-                theme="btn btn-secondary"
-                onClick={_send}
-                icon="arrow_forward"
-              />
-              <Button
-                name="Ver lista"
-                theme="btn btn-secondary"
-                onClick={_goList}
-                icon="arrow_forward"
-              />
+          <div className="row">
+            <div className="col col-6">
+              <div className="d-flex justify-content-between">
+                <Button
+                  name="Añadir producto "
+                  theme="btn btn-primary"
+                  onClick={_send}
+                  icon="arrow_forward"
+                />
+
+                <Button
+                  name="Ver lista"
+                  theme="btn btn-secondary"
+                  onClick={_goList}
+                  icon="arrow_forward"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const Select = (props) => {
   return (
     <div>
       <label>{name}</label>
-      <select className="form-control" value={value} onChange={_onChange}>
+      <select value={value} onChange={_onChange}>
         {options.map((option) => (
           <option key={option.id} value={option.value}>
             {option.name}
