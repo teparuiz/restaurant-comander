@@ -14,7 +14,8 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   const _getLayout = () => {
-    if (session) {
+
+   if (session) {
       return (
         <OrderProvider>
           <LayoutComponent>
@@ -35,7 +36,7 @@ export default function App({
   };
 
   return (
-    <Provider session={session} refetchInterval={5 * 60}>
+    <Provider session={session}>
       <Head>
         <title> WIP Burgers </title>
         <meta name="WIP Burgers" content="WIP Burgers" />

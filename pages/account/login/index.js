@@ -17,12 +17,10 @@ const LoginForm = () => {
       password,
       redirect: false,
     }).then((response) => {
-
-      console.log(response)
       if (response.error) {
         console.log("ocurrio un error");
       } else if (response?.url) {
-        router.push(response?.url);
+        router.push("/cashcut");
       }
     });
   };

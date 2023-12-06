@@ -573,7 +573,7 @@ function Home() {
 
    return {
      props: {
-       session: session
+       session,
      }
    }
  }

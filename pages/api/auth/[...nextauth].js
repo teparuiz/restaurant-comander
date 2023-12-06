@@ -40,6 +40,7 @@ const authOptions = {
       if (user) {
         token.accessToken = user.token;
       }
+
       return token;
     },
     async session(session, token) {
