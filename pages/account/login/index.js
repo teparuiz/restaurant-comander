@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "@teparuiz69/components/Input";
-import { Button } from "@teparuiz69/components/Button";
+import Input from "@teparuiz69/components/form/Input";
+import { Button } from "@teparuiz69/components/form/Button";
 import { HTTP } from "../../../config/http";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Input from "@teparuiz69/components/Input";
-import { Button } from "@teparuiz69/components/Button";
+import Input from "@teparuiz69/components/form/Input";
+import { Button } from "@teparuiz69/components/form/Button";
 import { useOrder } from "../../context/orders-context";
 import { useRouter } from "next/router";
-import Select from "@teparuiz69/components/Select";
+import Select from "@teparuiz69/components/form/Select";
 import { burguers } from "@teparuiz69/config/const";
 import { Button as ButtonAntd, Space } from "antd";
 const Orders = (props) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "@teparuiz69/components/Input";
-import { Button } from "@teparuiz69/components/Button";
+import Input from "@teparuiz69/components/form/Input";
+import { Button } from "@teparuiz69/components/form/Button";
 import { HTTP } from "../../../config/http";
 const Register = (props) => {
   const [firstName, setFirstName] = useState("");
