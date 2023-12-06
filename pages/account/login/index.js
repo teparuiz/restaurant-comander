@@ -41,7 +41,7 @@ const LoginForm = () => {
           <Form.Item
             name="username"
             rules={[
-              { required: false, message: "Please input your Username!" },
+              { required: true, message: "Por favor ingresa tu usuario" },
             ]}
           >
             <Input
@@ -52,13 +52,13 @@ const LoginForm = () => {
           <Form.Item
             name="password"
             rules={[
-              { required: false, message: "Please input your Password!" },
+              { required: true, message: "Por favor ingresa tu contraseña" },
             ]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
             />
             <a
               style={{ float: "right" }}
@@ -66,12 +66,12 @@ const LoginForm = () => {
               href=""
               onClick={handleForgotPassword}
             >
-              Forgot password
+              ¿Olvidaste la contraseña?
             </a>
           </Form.Item>
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>Recuérdame</Checkbox>
             </Form.Item>
           </Form.Item>
           <Form.Item>
@@ -81,11 +81,11 @@ const LoginForm = () => {
               className="login-form-button"
               block
             >
-              Log in
+              Inicia sesión
             </Button>
-            <a href="" onClick={handleRegister}>
-              sign up
-            </a>
+            {/* <a href="" onClick={handleRegister}>
+              Registrarme
+            </a> */}
           </Form.Item>
         </Form>
       </Card>
