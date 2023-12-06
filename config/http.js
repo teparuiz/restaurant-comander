@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API } from "./const";
-// import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { handleError } from "./utils";
 
 const api = axios.create({});

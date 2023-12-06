@@ -11,6 +11,7 @@
 */
 import { useState } from "react";
 import { getSession } from "next-auth/client";
+import { HTTP } from "../config/http";
 
 import {
   Card,
@@ -373,7 +374,7 @@ function Home() {
             </Col>
           ))}
         </Row>
-        
+
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
@@ -382,10 +383,10 @@ function Home() {
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
-               <LineChart />
+              <LineChart />
             </Card>
           </Col>
-        </Row> 
+        </Row>
 
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
@@ -559,23 +560,34 @@ function Home() {
   );
 }
 
- export async function getServerSideProps(context) {
-   const session = await getSession(context)
-   if (!session) {
-     return {
-       redirect: {
-         destination: "/account/login",
-         permanent: false,
-       },
-     };
-   }
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  let user;
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/account/login",
+        permanent: false,
+      },
+    };
+  }
 
 
-   return {
-     props: {
-       session,
-     }
-   }
- }
+
+  try {
+    user = await HTTP("GET", "/user", {}, session.accessToken);
+  } catch (err) {
+    console.error("Error al obtener al usuario", err);
+  }
+
+  return {
+    props: {
+      session,
+      accessToken: session?.accessToken,
+      user: user?.data,
+    },
+  };
+}
 
 export default Home;

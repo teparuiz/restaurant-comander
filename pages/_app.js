@@ -18,7 +18,7 @@ export default function App({
    if (session) {
       return (
         <OrderProvider>
-          <LayoutComponent>
+          <LayoutComponent {...pageProps} >
             <Component {...pageProps} />
           </LayoutComponent>
         </OrderProvider>

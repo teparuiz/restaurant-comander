@@ -18,7 +18,8 @@ import Footer from "./Footer";
 
 const { Header, Sider, Content } = Layout;
 
-const LayoutComponent = ({ children }) => {
+const LayoutComponent = (props) => {
+  const { children } = props;
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -30,6 +31,7 @@ const LayoutComponent = ({ children }) => {
       <NavBar collapsed={collapsed} />
       <Layout>
         <HeaderComponent
+          {...props}
           collapsed={collapsed}
           onCollapsed={setCollapsed}
           colorBgContainer={colorBgContainer}
