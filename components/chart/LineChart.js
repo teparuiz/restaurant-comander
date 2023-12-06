@@ -10,10 +10,12 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import ReactApexChart from "react-apexcharts";
 import { Typography } from "antd";
 import { MinusOutlined } from "@ant-design/icons";
 import lineChart from "./configs/lineChart";
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 function LineChart() {
   const { Title, Paragraph } = Typography;
@@ -35,7 +37,7 @@ function LineChart() {
         </div>
       </div>
 
-      <ReactApexChart
+      <Chart
         className="full-width"
         options={lineChart.options}
         series={lineChart.series}

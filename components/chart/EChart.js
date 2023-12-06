@@ -10,9 +10,13 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import ReactApexChart from "react-apexcharts";
+import React, { Component } from "react";
 import { Row, Col, Typography } from "antd";
 import eChart from "./configs/eChart";
+import dynamic from 'next/dynamic'
+    
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+
 
 function EChart() {
   const { Title, Paragraph } = Typography;
@@ -39,7 +43,7 @@ function EChart() {
   return (
     <>
       <div id="chart">
-        <ReactApexChart
+        <Chart
           className="bar-chart"
           options={eChart.options}
           series={eChart.series}

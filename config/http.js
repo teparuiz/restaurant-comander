@@ -37,8 +37,8 @@ export const HTTP = (
         return resolve(data);
       })
       .catch((err) => {
-        if (process.browser && err.response?.data?.status === 403)
-          return (window.location.href = "/account/login");
+        // if (process.browser && err.response?.data?.status === 403)
+        //   return (window.location.href = "/account/login");
         return reject(
           err?.response?.data || {
             error: true,
