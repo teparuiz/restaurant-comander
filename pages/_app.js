@@ -7,6 +7,7 @@ import Head from "next/head";
 
 // Layout
 import LayoutComponent from "@teparuiz69/components/Layout";
+import Footer from "@teparuiz69/components/Footer";
 
 export default function App({
   Component,
@@ -21,7 +22,19 @@ export default function App({
           </LayoutComponent>
         </OrderProvider>
       );
-    } else return <Component {...pageProps} />;
+    } else
+      return (
+
+        <>
+        <div className="wrapper">
+          <div className="container-fluid">
+            <Component {...pageProps} />
+          </div>
+        </div>
+      </>
+
+
+      );
   };
 
   return (

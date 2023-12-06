@@ -1,0 +1,9 @@
+.wrapper {
+    background-color: var(--background);
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .wrapper_container {
+    width: 100%;
+  }

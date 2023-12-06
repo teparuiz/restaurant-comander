@@ -1,70 +1,96 @@
-import React, { useState } from "react";
-import Input from "@teparuiz69/components/form/Input";
-import { Button } from "@teparuiz69/components/form/Button";
-import { HTTP } from "../../../config/http";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import { Layout, Menu, Row, Col, Typography, Form, Switch } from "antd";
-const Login = (props) => {
-  const router = useRouter();
-  const { Title } = Typography;
-  const { Header, Footer, Content } = Layout;
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [data, setData] = useState("");
+import React from "react";
+import { Form, Input, Button, Checkbox, Card } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
+const { Title } = Typography;
 
-  const _send = () => {
-    signIn("credentials", {
-      username: username,
-      password: password,
-      redirect: false,
-      callbackUrl: "/",
-    })
-      .then((response) => {
-        setData(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+const LoginForm = () => {
   const onFinish = (values) => {
-    console.log("Success:", values);
+    console.log(values);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    console.log("Handle password recovery logic here");
   };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log("Handle registration logic here");
+  };
+
   return (
-    <Layout className="layout-default layout-signin">
-      <Content className="signin">
-        <Row gutter={[24, 0]} justify="space-around">
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            lg={{ span: 6, offset: 2 }}
-            md={{ span: 12 }}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Card style={{ width: 500 }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Title level={2}> WIP Burgers </Title>
+        </div>
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            name="username"
+            rules={[
+              { required: false, message: "Please input your Username!" },
+            ]}
           >
-            <Title className="mb-15">Sign In</Title>
-            <Title className="font-regular text-muted" level={5}>
-              Enter your email and password to sign in
-            </Title>
-            <Input name="Usuario" value={username} onChange={setUsername} />
-
-            <Input name="Contraseña" value={password} onChange={setPassword} />
-            <Button name="Enviar" onClick={_send} theme="btn btn-secondary" />
-          </Col>
-          <Col
-            className="sign-img"
-            style={{ padding: 12 }}
-            xs={{ span: 24 }}
-            lg={{ span: 12 }}
-            md={{ span: 12 }}
-          ></Col>
-        </Row>
-      </Content>
-    </Layout>
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              { required: false, message: "Please input your Password!" },
+            ]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+            <a
+              style={{ float: "right" }}
+              className="login-form-forgot"
+              href=""
+              onClick={handleForgotPassword}
+            >
+              Forgot password
+            </a>
+          </Form.Item>
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+              block
+            >
+              Log in
+            </Button>
+            <a href="" onClick={handleRegister}>
+              sign up
+            </a>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
   );
 };
 
-export default Login;
+export default LoginForm;

@@ -1,3 +1,5 @@
+export const API = process.env.NEXT_PUBLIC_API_LOCAL;
+
 export const burguers = [
     {
         name: 'Crispy Chicken', value: '01'
@@ -15,6 +17,3 @@ export const burguers = [
         name: 'Cheese La Bichota', value: '05'
     },
 ]
-
-export const API='http://localhost:8000'
-export const API_LOCAL='http://localhost:8000'
