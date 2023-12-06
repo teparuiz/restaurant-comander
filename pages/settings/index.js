@@ -1,6 +1,6 @@
 import React from 'react'
 import { HTTP } from "/config/http";
-import { getSession } from "next-auth/react";
+import { getSession } from "next-auth/client";
 import { validationSessionUser } from "@teparuiz69/config/utils";
 
 const Settings = (props) => {
