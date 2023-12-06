@@ -2,7 +2,7 @@ import "@teparuiz69/styles/globals.css";
 import { OrderProvider } from "@teparuiz69/context/orders-context";
 import "material-icons/iconfont/material-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { SessionProvider } from "next-auth/react";
+import { Provider } from "next-auth/client";
 import Head from "next/head";
 
 // Layout
@@ -24,27 +24,24 @@ export default function App({
       );
     } else
       return (
-
         <>
-        <div className="wrapper">
-          <div className="container-fluid">
-            <Component {...pageProps} />
+          <div className="wrapper">
+            <div className="container-fluid">
+              <Component {...pageProps} />
+            </div>
           </div>
-        </div>
-      </>
-
-
+        </>
       );
   };
 
   return (
-    <SessionProvider session={session}>
+    <Provider session={session} refetchInterval={5 * 60}>
       <Head>
         <title> WIP Burgers </title>
         <meta name="WIP Burgers" content="WIP Burgers" />
       </Head>
 
       {_getLayout()}
-    </SessionProvider>
+    </Provider>
   );
 }

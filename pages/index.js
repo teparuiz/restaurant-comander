@@ -10,6 +10,7 @@
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import { useState } from "react";
+import { getSession } from "next-auth/client";
 
 import {
   Card,
@@ -557,5 +558,24 @@ function Home() {
     </>
   );
 }
+
+ export async function getServerSideProps(context) {
+   const session = await getSession(context)
+   if (!session) {
+     return {
+       redirect: {
+         destination: "/account/login",
+         permanent: false,
+       },
+     };
+   }
+
+
+   return {
+     props: {
+       session: session
+     }
+   }
+ }
 
 export default Home;

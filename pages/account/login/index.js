@@ -3,10 +3,28 @@ import { Form, Input, Button, Checkbox, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 const { Title } = Typography;
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/client";
 
 const LoginForm = () => {
-  const onFinish = (values) => {
-    console.log(values);
+  const router = useRouter();
+
+  const onFinish = async (values) => {
+    const username = values.username;
+    const password = values.password;
+    signIn("credentials", {
+      username,
+      password,
+      redirect: false,
+    }).then((response) => {
+
+      console.log(response)
+      if (response.error) {
+        console.log("ocurrio un error");
+      } else if (response?.url) {
+        router.push("/");
+      }
+    });
   };
 
   const handleForgotPassword = (e) => {
@@ -35,39 +53,33 @@ const LoginForm = () => {
         <Form
           name="normal_login"
           className="login-form"
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
         >
           <Form.Item
+            label="Username"
             name="username"
             rules={[
-              { required: true, message: "Por favor ingresa tu usuario" },
+              {
+                required: true,
+                message: "Please input your username!",
+              },
             ]}
           >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
+            <Input />
           </Form.Item>
+
           <Form.Item
+            label="Password"
             name="password"
             rules={[
-              { required: true, message: "Por favor ingresa tu contraseña" },
+              {
+                required: true,
+                message: "Please input your password!",
+              },
             ]}
           >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Contraseña"
-            />
-            <a
-              style={{ float: "right" }}
-              className="login-form-forgot"
-              href=""
-              onClick={handleForgotPassword}
-            >
-              ¿Olvidaste la contraseña?
-            </a>
+            <Input.Password />
           </Form.Item>
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
