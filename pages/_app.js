@@ -7,7 +7,8 @@ import Head from "next/head";
 
 // Layout
 import LayoutComponent from "@teparuiz69/components/Layout";
-import Footer from "@teparuiz69/components/Footer";
+//Progress
+import NextProgress from "next-progress";
 
 export default function App({
   Component,
@@ -41,7 +42,7 @@ export default function App({
         <title> WIP Burgers </title>
         <meta name="WIP Burgers" content="WIP Burgers" />
       </Head>
-
+      <NextProgress delay={300} />
       {_getLayout()}
     </Provider>
   );

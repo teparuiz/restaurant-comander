@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import Select from "@teparuiz69/components/form/Select";
 import { burguers } from "@teparuiz69/config/const";
 import { Button as ButtonAntd, Space } from "antd";
+import { HTTP } from "@teparuiz69/config/http";
+import { getSession } from "next-auth/client";
 const Orders = (props) => {
   const { getOrder, saveOrder } = useOrder();
   const router = useRouter();
@@ -106,4 +108,33 @@ const Orders = (props) => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  let user;
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/account/login",
+        permanent: false,
+      },
+    };
+  }
+
+
+
+  try {
+    user = await HTTP("GET", "/user", {}, session.accessToken);
+  } catch (err) {
+    console.error("Error al obtener al usuario", err);
+  }
+
+  return {
+    props: {
+      session,
+      accessToken: session?.accessToken,
+      user: user?.data,
+    },
+  };
+}
 export default Orders;

@@ -13,6 +13,9 @@ const HeaderComponent = (props) => {
         style={{
           padding: 0,
           background: colorBgContainer,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Button
@@ -29,10 +32,10 @@ const HeaderComponent = (props) => {
         <Avatar
           className="avatar"
           style={{
-            fontSize: "16px",
-            justifyContent: 'flex-end'
+            fontSize: "20px",
+            marginRight: "20px",
           }}
-          size={26}
+          size={40}
         >{`${props.user.firstName[0]}${props.user.lastName[0]}`}</Avatar>
       </Header>
     </div>

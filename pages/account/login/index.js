@@ -55,12 +55,12 @@ const LoginForm = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="Username"
+            label="Usuario"
             name="username"
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Por favor ingresa tu usuario",
               },
             ]}
           >
@@ -68,12 +68,12 @@ const LoginForm = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="Contraseña"
             name="password"
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: "Por favor ingresa tu contraseña",
               },
             ]}
           >

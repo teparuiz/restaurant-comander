@@ -3,7 +3,7 @@ import { useOrder } from "@teparuiz69/context/orders-context";
 import { findList } from "@teparuiz69/config/utils";
 import { burguers } from "@teparuiz69/config/const";
 import { HTTP } from "/config/http";
-import { getSession } from "next-auth/react";
+import { getSession } from "next-auth/client";
 import { validationSessionUser } from "@teparuiz69/config/utils";
 import { Button } from "antd";
 import { useRouter } from "next/router";
@@ -75,48 +75,32 @@ const ListOrder = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  const {} = context.query;
   const session = await getSession(context);
   let user;
-  if (!session)
+
+  if (!session) {
     return {
       redirect: {
         destination: "/account/login",
         permanent: false,
       },
     };
-  try {
-    user = await HTTP("GET", "/list", {}, session.accessToken);
-    if (validationSessionUser(user)) return validationSessionUser(user);
-  } catch (err) {
-    return validationSessionUser(err);
   }
-  let data;
+
+
+
   try {
-    data = await HTTP(
-      "GET",
-      `user/all`,
-      { ...context.query },
-      session?.accessToken
-    );
+    user = await HTTP("GET", "/user", {}, session.accessToken);
   } catch (err) {
-    return validationSessionUser(err);
+    console.error("Error al obtener al usuario", err);
   }
 
   return {
     props: {
-      session: session,
-      accessToken: session.accessToken,
-      layout: "admin",
-      user: user,
-      data: data,
-      params: {
-        ...context.query,
-        s,
-      },
-      rol: rol,
+      session,
+      accessToken: session?.accessToken,
+      user: user?.data,
     },
   };
 }
-
 export default ListOrder;
