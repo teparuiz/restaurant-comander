@@ -5,6 +5,8 @@ import { Typography } from "antd";
 const { Title } = Typography;
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
+import Image from "next/image";
+import Logo from "@teparuiz69/components/icons/Logo";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -46,7 +48,14 @@ const LoginForm = () => {
     >
       <Card style={{ width: 500 }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Title level={2}> WIP Burgers </Title>
+          <div className="p-3">
+            <Image
+              src={"/WIP Burgers Logo.png"}
+              alt="logo wip burgers"
+              width={250}
+              height={250}
+            />
+          </div>
         </div>
         <Form
           name="normal_login"
