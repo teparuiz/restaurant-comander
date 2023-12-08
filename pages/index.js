@@ -47,6 +47,7 @@ import team2 from "../public/assets/images/team-2.jpg";
 import team3 from "../public/assets/images/team-3.jpg";
 import team4 from "../public/assets/images/team-4.jpg";
 import card from "../public/assets/images/info-card-1.jpg";
+import Notification from "@teparuiz69/components/form/notifications/Notification";
 
 function Home() {
   const { Title, Text } = Typography;
@@ -374,6 +375,17 @@ function Home() {
             </Col>
           ))}
         </Row>
+        <Button
+        onClick={() => {
+          Notification({
+            type: "success",
+            message: "notificacion",
+            description: "mensaje",
+          });
+        }}
+      >
+        Click me
+      </Button>
 
         <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
