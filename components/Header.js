@@ -1,5 +1,5 @@
 import React from "react";
-import { signOut } from 'next-auth/client'
+import { signOut } from "next-auth/client";
 
 import { Layout, Button, Avatar } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
@@ -29,18 +29,17 @@ const HeaderComponent = (props) => {
             height: 64,
           }}
         />
-
-        <Avatar
-          className="avatar"
-          style={{
-            fontSize: "20px",
-            marginRight: "20px",
-          }}
-          size={40}
-        >{`${props.user.firstName[0]}${props.user.lastName[0]}`}</Avatar>
-        <Button onClick={() => signOut()}>
-          Salir
-        </Button>
+        <div className="d-flex justify-content-between align-items-center mr-2">
+          <Avatar
+            className="avatar"
+            style={{
+              fontSize: "20px",
+              marginRight: "20px",
+            }}
+            size={40}
+          >{`${props.user.firstName[0]}${props.user.lastName[0]}`}</Avatar>
+          <Button onClick={() => signOut()}>Cerrar sesion</Button>
+        </div>
       </Header>
     </div>
   );
