@@ -48,6 +48,7 @@ import team3 from "../public/assets/images/team-3.jpg";
 import team4 from "../public/assets/images/team-4.jpg";
 import card from "../public/assets/images/info-card-1.jpg";
 import Notification from "@teparuiz69/components/form/notifications/Notification";
+import { validationSessionUser } from "@teparuiz69/config/utils";
 
 function Home() {
   const { Title, Text } = Typography;
@@ -578,8 +579,9 @@ export async function getServerSideProps(context) {
 
   try {
     user = await HTTP("GET", "/user", {}, session.accessToken);
+    if (user) validationSessionUser(user)
   } catch (err) {
-    console.error("Error al obtener al usuario", err);
+    validationSessionUser(user)
   }
 
   return {
