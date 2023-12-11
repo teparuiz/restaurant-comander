@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
 import Image from "next/image";
 import Logo from "@teparuiz69/components/icons/Logo";
+import { handleSuccess } from "@teparuiz69/config/utils";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const LoginForm = () => {
         console.log("ocurrio un error");
       } else if (response?.url) {
         router.push("/");
+        handleSuccess('Sesion iniciada con exito')
       }
     });
   };

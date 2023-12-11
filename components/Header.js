@@ -1,4 +1,5 @@
 import React from "react";
+import { signOut } from 'next-auth/client'
 
 import { Layout, Button, Avatar } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
@@ -37,6 +38,9 @@ const HeaderComponent = (props) => {
           }}
           size={40}
         >{`${props.user.firstName[0]}${props.user.lastName[0]}`}</Avatar>
+        <Button onClick={() => signOut()}>
+          Salir
+        </Button>
       </Header>
     </div>
   );
