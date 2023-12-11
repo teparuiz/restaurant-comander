@@ -1,7 +1,7 @@
 import "@teparuiz69/styles/globals.css";
 import { OrderProvider } from "@teparuiz69/context/orders-context";
 import "material-icons/iconfont/material-icons.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "next-auth/client";
 import Head from "next/head";
@@ -20,11 +20,17 @@ export default function App({
   const _getLayout = () => {
     if (session) {
       return (
-        <OrderProvider>
-          <LayoutComponent {...pageProps}>
-            <Component {...pageProps} />
-          </LayoutComponent>
-        </OrderProvider>
+        <>
+          <div className="wrapper">
+           <div className="wrapper_container">
+           <OrderProvider>
+              <LayoutComponent {...pageProps}>
+                <Component {...pageProps} />
+              </LayoutComponent>
+            </OrderProvider>
+           </div>
+          </div>
+        </>
       );
     } else
       return (

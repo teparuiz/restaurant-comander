@@ -575,13 +575,18 @@ export async function getServerSideProps(context) {
     };
   }
 
-
+  console.log(user);
 
   try {
     user = await HTTP("GET", "/user", {}, session.accessToken);
-    if (user) validationSessionUser(user)
+    if (user) validationSessionUser(user);
   } catch (err) {
-    validationSessionUser(user)
+    return {
+      redirect: {
+        destination: "/account/login",
+        permanent: false,
+      },
+    };
   }
 
   return {

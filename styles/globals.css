@@ -7,3 +7,16 @@
   .wrapper_container {
     width: 100%;
   }
+
+  body {
+    /* margin: 0px;
+    padding: 0px;
+    font-size: var(--font-size);
+    font-family: var(--font-regular);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--main-color);
+    background-color: var(--background); */
+    height: 100%;
+  }

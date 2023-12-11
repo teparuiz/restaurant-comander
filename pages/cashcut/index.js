@@ -1,8 +1,9 @@
 import React from "react";
-import { Table, Space, Tag } from "antd";
+import { Table, Space, Tag, Button } from "antd";
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
+import { useRouter } from 'next/router';
 
 const columns = [
   {
@@ -76,9 +77,12 @@ const data = [
   },
 ];
 const CashCut = (props) => {
+
+  const router = useRouter();
   return (
-    <div>
+    <div className="container-fluid">
       <h1> Corte de caja</h1>
+      <Button onClick={() => router.push('/cashcut/new')}> Nuevo corte </Button>
       <Table dataSource={data} columns={columns} />;
     </div>
   );
