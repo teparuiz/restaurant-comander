@@ -15,6 +15,7 @@ import MenuComponent from "./Menu";
 import NavBar from "./NavBar";
 import HeaderComponent from "./Header";
 import Footer from "./Footer";
+import style from '../styles/layout.module.css'
 
 const { Header, Sider, Content } = Layout;
 
@@ -37,10 +38,8 @@ const LayoutComponent = (props) => {
           colorBgContainer={colorBgContainer}
         />
         <Content
+        className={style.content}
           style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
             background: colorBgContainer,
           }}
         >
