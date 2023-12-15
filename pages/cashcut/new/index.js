@@ -2,13 +2,12 @@ import React from 'react';
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
-import { Input } from 'antd';
-import Title from 'antd/es/typography/Title';
+import SalesRecordCollapse from '@teparuiz69/components/collapse/SalesRecordCollapse';
 
 const NewCashCut = (props) => {
   return (
     <div>
-      <Title> Corte de caja </Title>
+      <SalesRecordCollapse />
    
     </div>
   )

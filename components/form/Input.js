@@ -1,31 +1,20 @@
 import React from "react";
+import { Input as InputAnt, Typography } from "antd";
 
 const Input = (props) => {
-  const {
-    name = "",
-    onChange,
-    value,
-    type,
-    placeholder = "",
-    className = "form-control me-2",
-  } = props;
+  const { onChange, value, title = "", placeholder = "" } = props;
 
   const _onChange = (e) => {
-    onChange(e.target.value);
+    if (onChange) {
+      e.preventDefault();
+      onChange(e.target.value);
+    }
   };
 
   return (
-    <div className="mb-3">
-      <label>
-        {name}
-        <input
-          className={className}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          onChange={_onChange}
-          />
-      </label>
+    <div className="flex-column">
+      <Typography.Title level={5}>{title}</Typography.Title>
+      <InputAnt onChange={_onChange} value={value} placeholder={placeholder} />
     </div>
   );
 };

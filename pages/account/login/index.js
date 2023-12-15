@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
 import Image from "next/image";
 import Logo from "@teparuiz69/components/icons/Logo";
-import { handleSuccess } from "@teparuiz69/config/utils";
+import { handleError, handleSuccess } from "@teparuiz69/config/utils";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const LoginForm = () => {
       redirect: false,
     }).then((response) => {
       if (response.error) {
-        console.log("ocurrio un error");
+        handleError('Error al iniciar sesión, favor de revisar los datos')
       } else if (response?.url) {
         router.push("/");
         handleSuccess('Sesion iniciada con exito')

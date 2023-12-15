@@ -1,5 +1,5 @@
 .content {
     margin: 24px 16px;
     padding: 24px;
-    min-height: 550px
+    height: 100vh;
 }
