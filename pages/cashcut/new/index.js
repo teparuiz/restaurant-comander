@@ -8,12 +8,12 @@ import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCo
 const NewCashCut = (props) => {
   return (
     <div>
-    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <SalesRecordCollapse />
-    </div>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <SalesRecordCollapse />
+      </div>
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <IncomeRecordCollapse />
+        <IncomeRecordCollapse />
       </div>
       <div className="divider"></div>
     </div>

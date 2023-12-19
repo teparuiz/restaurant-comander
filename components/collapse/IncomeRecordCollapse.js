@@ -30,13 +30,23 @@ const IncomeRecordCollapse = () => {
     }
   };
 
+  const _trash = (index) => {
+    saveIncome([...getIncome.slice(0, index), ...getIncome.slice(index + 1)]);
+  };
+
   return (
     <div className="container_table_card">
       <h3> Registro de ingresos</h3>
 
       <div className="d-flex">
         {getIncome.map((i, idx) => (
-          <IncomeCard description={findList(payMethod, i.description)} total={i.total} key={idx} />
+          <IncomeCard
+            description={findList(payMethod, i.description)}
+            total={i.total}
+            key={idx}
+            trash={() => _trash(idx)}
+            onEdit={() => setVisible({ visible: true, data: i })}
+          />
         ))}
       </div>
       <div className="d-flex justify-content-end">
