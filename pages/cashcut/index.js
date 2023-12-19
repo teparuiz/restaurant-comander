@@ -82,7 +82,7 @@ const CashCut = (props) => {
   return (
     <div className="container-fluid">
       <h1> Corte de caja</h1>
-      <Button onClick={() => router.push('/cashcut/new')}> Nuevo corte </Button>
+      <div className="mb-3"><Button onClick={() => router.push('/cashcut/new')}> Nuevo corte </Button></div>
       <Table dataSource={data} columns={columns} />;
     </div>
   );

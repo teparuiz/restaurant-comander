@@ -12,7 +12,7 @@ const Input = (props) => {
   };
 
   return (
-    <div className="flex-column">
+    <div className="flex-column pb-2">
       <Typography.Title level={5}>{title}</Typography.Title>
       <InputAnt onChange={_onChange} value={value} placeholder={placeholder} />
     </div>

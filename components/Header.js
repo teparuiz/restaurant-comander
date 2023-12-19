@@ -2,7 +2,11 @@ import React from "react";
 import { signOut } from "next-auth/client";
 
 import { Layout, Button, Avatar } from "antd";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 
 const { Header } = Layout;
 
@@ -29,7 +33,7 @@ const HeaderComponent = (props) => {
             height: 64,
           }}
         />
-        <div className="d-flex justify-content-between align-items-center mr-2">
+        <div className="d-flex justify-content-between align-items-center">
           <Avatar
             className="avatar"
             style={{
@@ -38,7 +42,10 @@ const HeaderComponent = (props) => {
             }}
             size={40}
           >{`${props.user.firstName[0]}${props.user.lastName[0]}`}</Avatar>
-          <Button onClick={() => signOut()}>Cerrar sesion</Button>
+
+          <Button icon={<LogoutOutlined />} onClick={() => signOut()}>
+            Salir
+          </Button>
         </div>
       </Header>
     </div>
