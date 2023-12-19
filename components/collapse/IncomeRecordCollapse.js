@@ -3,16 +3,31 @@ import Input from "../form/Input";
 import { Button } from "antd";
 import IncomeCard from "../card/IncomeCard";
 import ModalIncome from "../modal/Income/ModalIncome";
+import { useCashCut } from "../../context/cashcut-context";
+import { findList, payMethodLabel } from "../../config/utils";
+import { payMethod } from "@teparuiz69/config/const";
 
 const IncomeRecordCollapse = () => {
+  const { getIncome, saveIncome } = useCashCut();
   const [incomeRecord, setIncomeRecord] = useState("");
   const [visible, setVisible] = useState({
     visible: false,
     data: false,
   });
 
-  const _onClose = () => {
+  const _onClose = (reload = false) => {
     setVisible({ visible: false, data: false });
+
+    if (reload) {
+      let idx = getIncome.map((i) => i.id).indexOf(reload.id);
+      if (idx === -1) saveIncome([...getIncome, reload]);
+      else
+        saveIncome([
+          ...getIncome.slice(0, idx),
+          reload,
+          ...getIncome.slice(idx + 1),
+        ]);
+    }
   };
 
   return (
@@ -20,9 +35,9 @@ const IncomeRecordCollapse = () => {
       <h3> Registro de ingresos</h3>
 
       <div className="d-flex">
-        <IncomeCard description="Efectivo" total={"$2,000"} />
-        <IncomeCard description="Depósito" total={"$2,000"} />
-        <IncomeCard description="Tarjeta" total={"$2,000"} />
+        {getIncome.map((i, idx) => (
+          <IncomeCard description={findList(payMethod, i.description)} total={i.total} key={idx} />
+        ))}
       </div>
       <div className="d-flex justify-content-end">
         <Button

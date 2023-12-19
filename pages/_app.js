@@ -13,6 +13,7 @@ import NextProgress from "next-progress";
 // Notification
 
 import { ToastContainer, toast } from "react-toastify";
+import { CashCutProvider } from "@teparuiz69/context/cashcut-context";
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
@@ -24,9 +25,11 @@ export default function App({
           <div className="wrapper">
            <div className="wrapper_container">
            <OrderProvider>
+            <CashCutProvider>
               <LayoutComponent {...pageProps}>
                 <Component {...pageProps} />
               </LayoutComponent>
+              </CashCutProvider>
             </OrderProvider>
            </div>
           </div>

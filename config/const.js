@@ -23,3 +23,23 @@ export const burguers = [
     value: "05",
   },
 ];
+
+
+export const payMethod = [
+  {
+    label: 'Tarjeta de crédito',
+    value: 1
+  },
+  {
+    label: 'Tarjeta de débido',
+    value: 2,
+  },
+  { 
+    label: 'Efectivo',
+    value: 3,
+  },
+  { 
+    label: 'Transferencia/depósito',
+    value: 4,
+  }
+]

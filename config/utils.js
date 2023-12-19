@@ -1,5 +1,5 @@
 export const findList = (list, value) =>
-  list.find((i) => i.value === value)?.name;
+  list.find((i) => i.value === value)?.label;
 
 export const validationSessionUser = (user) => {
   if (!user) {

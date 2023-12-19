@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import { Button, Drawer, Space } from "antd";
 import Input from "@teparuiz69/components/form/Input";
 import Select from "@teparuiz69/components/form/Select";
+import { v4 as uuidv4 } from "uuid";
+import { payMethod } from "@teparuiz69/config/const";
 
 const ModalIncome = (props) => {
   const { visible = false, onClose } = props;
   const [description, setDescription] = useState("-1");
   const [total, setTotal] = useState(0);
 
-  const _onClose = () => {
-    if (onClose) onClose();
+  const _onClose = (reload = false) => {
+    if (onClose) onClose(reload);
+  };
+
+  const _save = () => {
+    const obj = {
+      id: uuidv4(),
+      description: description,
+      total: total,
+    };
+
+    _onClose(obj);
   };
 
   return (
@@ -22,10 +34,7 @@ const ModalIncome = (props) => {
         name="Seleccione una cuenta"
         value={description}
         onChange={setDescription}
-        options={[
-          { label: "Efectivo", value: 1 },
-          { label: "Tarjeta", value: 2 },
-        ]}
+        options={[...payMethod]}
       />
       <Input title="Total" value={total} onChange={setTotal} />
       <div className="divider"></div>
@@ -35,7 +44,9 @@ const ModalIncome = (props) => {
         </Space>
 
         <Space>
-          <Button type="primary">Guardar</Button>
+          <Button type="primary" onClick={_save}>
+            Guardar
+          </Button>
         </Space>
       </div>
     </Drawer>
