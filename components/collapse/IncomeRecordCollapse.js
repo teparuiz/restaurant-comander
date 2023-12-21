@@ -36,7 +36,7 @@ const IncomeRecordCollapse = () => {
 
   return (
     <div className="container_table_card">
-      <h3> Registro de ingresos</h3>
+      <h3> Ingresos</h3>
 
       <div className="d-flex">
         {getIncome.map((i, idx) => (

@@ -7,7 +7,7 @@ const SalesRecordCollapse = () => {
 
   return (
     <div className="container_table_card">
-      <h3> Registro de ventas</h3>
+      <h3> Ventas </h3>
 
       <div className="col col-lg-4">
         <Input

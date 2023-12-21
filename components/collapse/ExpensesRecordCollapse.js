@@ -2,6 +2,7 @@ import { Button } from "antd";
 import React, { useState } from "react";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 import ModalExpense from "../modal/Income/ModalExpense";
+import ExpenseCard from "../card/ExpenseCard";
 
 const ExpensesRecordCollapse = (props) => {
   const { getExpense, saveExpense } = useCashCut();
@@ -29,10 +30,25 @@ const ExpensesRecordCollapse = (props) => {
     }
   };
 
+  const _trash = (index) => {
+    saveExpense([...getExpense.slice(0, index), ...getExpense.slice(index + 1)]);
+  };
+
   return (
     <div className="container_table_card">
-      <h3> Registro de egresos y pagos</h3>
-      <div className="d-flex"></div>
+      <h3> Pagos y egresos</h3>
+      <div className="d-flex">
+        {getExpense.map((item, index) => (
+          <ExpenseCard
+            total={item.total}
+            provider={item.provider}
+            description={item.description}
+            key={index}
+            trash={() => _trash(index)}
+            onEdit={() => setVisible({ visible: true, data: item })}
+          />
+        ))}
+      </div>
       <div className="d-flex justify-content-end">
         <Button
           type="primary"
