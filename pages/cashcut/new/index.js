@@ -4,6 +4,7 @@ import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
 import SalesRecordCollapse from "@teparuiz69/components/collapse/SalesRecordCollapse";
 import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCollapse";
+import ExpensesRecordCollapse from "@teparuiz69/components/collapse/ExpensesRecordCollapse";
 
 const NewCashCut = (props) => {
   return (
@@ -14,6 +15,10 @@ const NewCashCut = (props) => {
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <IncomeRecordCollapse />
+      </div>
+      <div className="divider"></div>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ExpensesRecordCollapse />
       </div>
       <div className="divider"></div>
     </div>
