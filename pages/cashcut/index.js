@@ -3,86 +3,77 @@ import { Table, Space, Tag, Button } from "antd";
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Fecha",
+    dataIndex: "date",
+    key: "date",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: "Venta",
+    dataIndex: "sale",
+    key: "sale",
+    render: (sale) => <a>$ {sale}</a>,
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: "Usuario",
+    dataIndex: "user",
+    key: "user",
   },
+
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
+    title: "Acción",
+    key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <a>Detalle</a>
       </Space>
     ),
   },
 ];
 const data = [
   {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    key: "1",
+    date: "22/01/2024",
+    sale: 900,
+    user: "Rodrigo",
   },
   {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    key: "2",
+    date: "23/01/2024",
+    sale: 900,
+    user: "Victor",
   },
   {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    key: "3",
+    date: "24/01/2024",
+    sale: 900,
+    user: "Melchor",
+  },
+  {
+    key: "4",
+    date: "25/01/2024",
+    sale: 900,
+    user: "Milka",
   },
 ];
 const CashCut = (props) => {
-
   const router = useRouter();
   return (
     <div className="container-fluid">
       <h1> Corte de caja</h1>
-      <div className="mb-3"><Button onClick={() => router.push('/cashcut/new')}> Nuevo corte </Button></div>
+      <div className="d-flex justify-content-end mb-3">
+        <Button
+          onClick={() => router.push("/cashcut/new")}
+          icon={<i className="material-icons">add</i>}
+        >
+          {" "}
+          Nuevo corte{" "}
+        </Button>
+      </div>
       <Table dataSource={data} columns={columns} />;
     </div>
   );

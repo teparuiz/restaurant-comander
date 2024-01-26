@@ -6,6 +6,7 @@ import SalesRecordCollapse from "@teparuiz69/components/collapse/SalesRecordColl
 import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCollapse";
 import ExpensesRecordCollapse from "@teparuiz69/components/collapse/ExpensesRecordCollapse";
 import CountCash from "@teparuiz69/components/collapse/CountCash";
+import { Button } from "antd";
 
 const NewCashCut = (props) => {
   return (
@@ -15,17 +16,32 @@ const NewCashCut = (props) => {
       </div>
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <IncomeRecordCollapse />
+        <ExpensesRecordCollapse />
       </div>
+
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <ExpensesRecordCollapse />
+        <IncomeRecordCollapse />
       </div>
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <CountCash />
       </div>
       <div className="divider"></div>
+      <div className="row sticky_bottom force_sticky  mt-4">
+        <div className="col col-12">
+          <div className="cashcut_footer">
+            <div className="d-flex-column">
+              <p>Esperado: $ 6,249.50</p>
+              <p>Creditos: $ 198.0</p>
+              <p>Efectivo total: $6, 051.50</p>
+              <p> Diferencia: $ 48.00 </p>{" "}
+              {`//**TODO diferencia si es menor debbe estar en rojo y si es mayor en warning, si queda cero es ok o sea en verde */`}
+            </div>
+            <Button title="Guardar" type="primary" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Input from "../form/Input";
-import { Button } from "antd";
 import IncomeCard from "../card/IncomeCard";
 import ModalIncome from "../modal/Income/ModalIncome";
 import { useCashCut } from "../../context/cashcut-context";
 import { findList, payMethodLabel } from "../../config/utils";
 import { payMethod } from "@teparuiz69/config/const";
+import { Button } from "../form/Button";
 
 const IncomeRecordCollapse = () => {
   const { getIncome, saveIncome } = useCashCut();
@@ -51,11 +50,10 @@ const IncomeRecordCollapse = () => {
       </div>
       <div className="d-flex justify-content-end">
         <Button
-          type="primary"
+          name="Añadir ingreso"
           onClick={() => setVisible({ visible: true, data: false })}
-        >
-          Añadir ingreso
-        </Button>
+        
+        />
       </div>
       <ModalIncome
         visible={visible.visible}

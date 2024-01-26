@@ -1,8 +1,8 @@
-import { Button } from "antd";
 import React, { useState } from "react";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 import ModalExpense from "../modal/Income/ModalExpense";
 import ExpenseCard from "../card/ExpenseCard";
+import { Button } from "../form/Button";
 
 const ExpensesRecordCollapse = (props) => {
   const { getExpense, saveExpense } = useCashCut();
@@ -36,8 +36,10 @@ const ExpensesRecordCollapse = (props) => {
 
   return (
     <div className="container_table_card">
-      <h3> Pagos y egresos</h3>
+      <h3>Egresos</h3>
       <div className="d-flex">
+        <div className="col-6">
+          <h5>Gastos caja</h5>
         {getExpense.map((item, index) => (
           <ExpenseCard
             total={item.total}
@@ -48,19 +50,17 @@ const ExpensesRecordCollapse = (props) => {
             onEdit={() => setVisible({ visible: true, data: item })}
           />
         ))}
+        </div>
+        <div className="col-6">
+          <h5>Envios</h5>
+        </div>
       </div>
       <div className="d-flex justify-content-end">
         <Button
-          type="primary"
-          onClick={() =>
-            setVisible({
-              visible: true,
-              data: false,
-            })
-          }
-        >
-          Añadir egreso
-        </Button>
+          name="Añadir egreso"
+          onClick={() => setVisible({ visible: true, data: false })}
+        
+        />
       </div>
       <ModalExpense
         visible={visible.visible}
