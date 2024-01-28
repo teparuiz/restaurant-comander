@@ -1,9 +1,10 @@
 import React from "react";
-import { Table, Space, Tag, Button } from "antd";
+import { Table, Space } from "antd";
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
 import { useRouter } from "next/router";
+import { Button } from "@teparuiz69/components/form/Button";
 
 const columns = [
   {
@@ -67,12 +68,10 @@ const CashCut = (props) => {
       <h1> Corte de caja</h1>
       <div className="d-flex justify-content-end mb-3">
         <Button
-          onClick={() => router.push("/cashcut/new")}
-          icon={<i className="material-icons">add</i>}
-        >
-          {" "}
-          Nuevo corte{" "}
-        </Button>
+        name="Nuevo corte"
+        onClick={()=> router.push('/cashcut/new')}
+        icon=""
+        />
       </div>
       <Table dataSource={data} columns={columns} />;
     </div>

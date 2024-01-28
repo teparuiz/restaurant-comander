@@ -575,8 +575,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  console.log(user);
-
   try {
     user = await HTTP("GET", "/user", {}, session.accessToken);
     if (user) validationSessionUser(user);

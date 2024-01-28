@@ -15,7 +15,7 @@ import MenuComponent from "./Menu";
 import NavBar from "./NavBar";
 import HeaderComponent from "./Header";
 import Footer from "./Footer";
-import style from '../styles/layout.module.css'
+import style from "../styles/layout.module.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,10 +38,10 @@ const LayoutComponent = (props) => {
           colorBgContainer={colorBgContainer}
         />
         <Content
-        className={style.content}
           style={{
             background: colorBgContainer,
           }}
+          className={style.content}
         >
           {children}
         </Content>

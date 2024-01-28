@@ -22,8 +22,7 @@ export default function App({
     if (session) {
       return (
         <>
-          <div className="wrapper">
-           <div className="wrapper_container">
+
            <OrderProvider>
             <CashCutProvider>
               <LayoutComponent {...pageProps}>
@@ -31,8 +30,6 @@ export default function App({
               </LayoutComponent>
               </CashCutProvider>
             </OrderProvider>
-           </div>
-          </div>
         </>
       );
     } else
