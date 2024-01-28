@@ -62,7 +62,12 @@ export async function getServerSideProps(context) {
     user = await HTTP("GET", "/user", {}, session.accessToken);
     if (user) validationSessionUser(user);
   } catch (err) {
-    validationSessionUser(user);
+    return {
+      redirect: {
+        destionation: "/500",
+        permanent: false,
+      },
+    };
   }
 
   return {

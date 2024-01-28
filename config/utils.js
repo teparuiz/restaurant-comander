@@ -2,7 +2,8 @@ export const findList = (list, value) =>
   list.find((i) => i.value === value)?.label;
 
 export const validationSessionUser = (user) => {
-  if (!user) {
+
+  if (!user.status) {
     return {
       redirect: {
         destination: "/account/login",
