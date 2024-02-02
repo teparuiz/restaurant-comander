@@ -45,10 +45,10 @@ const authOptions = {
     },
 
     async session(session, token) {
-      delete session.user;
+      session.userId = token.userId;
       session.accessToken = token.accessToken;
-      session.id = token.id;
-      return session;
+
+      return session; 
     },
     async redirect(url, baseUrl) {
       return `${baseUrl}/`;

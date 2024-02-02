@@ -59,12 +59,16 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    user = await HTTP("GET", "/user", {}, session.accessToken);
-    if (user) validationSessionUser(user);
+    user = await HTTP(
+      "GET",
+      `/api/v1/users/${session.userId}`,
+      {},
+      session.accessToken
+    );
   } catch (err) {
     return {
       redirect: {
-        destionation: "/500",
+        destination: "/account/login",
         permanent: false,
       },
     };
@@ -74,7 +78,7 @@ export async function getServerSideProps(context) {
     props: {
       session,
       accessToken: session?.accessToken,
-      user: user?.data,
+      user: user,
     },
   };
 }
