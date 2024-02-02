@@ -11,23 +11,23 @@ const authOptions = {
     Providers.Credentials({
       name: "credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         try {
           const result = await axios({
             method: "POST",
-            url: `${process.env.NEXT_PUBLIC_API_LOCAL}/login`,
+            url: `${process.env.NEXT_PUBLIC_API_LOCAL}/api/v1/auth/login`,
             data: {
-              username: credentials.username,
+              email: credentials.email,
               password: credentials.password,
             },
           });
-
           return {
             token: result.data.data.token,
             accessToken: result.data.data.token,
+            userId: result.data.data.user.id
           };
         } catch (e) {
           throw new Error(JSON.stringify(e.response.data));
@@ -39,13 +39,15 @@ const authOptions = {
     async jwt(token, user) {
       if (user) {
         token.accessToken = user.token;
+        token.userId = user.userId;
       }
-
       return token;
     },
+
     async session(session, token) {
       delete session.user;
       session.accessToken = token.accessToken;
+      session.id = token.id;
       return session;
     },
     async redirect(url, baseUrl) {

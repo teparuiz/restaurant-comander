@@ -13,10 +13,10 @@ const LoginForm = () => {
   const router = useRouter();
 
   const onFinish = async (values) => {
-    const username = values.username;
+    const email = values.email;
     const password = values.password;
     signIn("credentials", {
-      username,
+      email,
       password,
       redirect: false,
     }).then((response) => {
@@ -29,15 +29,6 @@ const LoginForm = () => {
     });
   };
 
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    console.log("Handle password recovery logic here");
-  };
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log("Handle registration logic here");
-  };
 
   return (
     <div
@@ -66,12 +57,12 @@ const LoginForm = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            label="Usuario"
-            name="username"
+            label="Email"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Por favor ingresa tu usuario",
+                message: "Por favor ingresa tu correo electronico",
               },
             ]}
           >

@@ -576,8 +576,7 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    user = await HTTP("GET", "/user", {}, session.accessToken);
-    if (user) validationSessionUser(user);
+    user = await HTTP("GET", "/api/v1/users/1", {}, session.accessToken);
   } catch (err) {
     return {
       redirect: {
@@ -591,7 +590,7 @@ export async function getServerSideProps(context) {
     props: {
       session,
       accessToken: session?.accessToken,
-      user: user?.data,
+      user: user
     },
   };
 }
