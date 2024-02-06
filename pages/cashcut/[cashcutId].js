@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Tooltip } from "antd";
+import { Table, Space } from "antd";
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
 import { validationSessionUser } from "@teparuiz69/config/utils";
@@ -14,63 +14,16 @@ const CashCut = (props) => {
     if (props.data) setData(props.data);
   }, [props.data]);
 
-  const columns = [
-    {
-      title: "Fecha",
-      dataIndex: "date",
-      key: "date",
-      render: (date) => <a>{date}</a>,
-    },
-    {
-      title: "Venta",
-      dataIndex: "kyteSells",
-      key: "kyteSells",
-      render: (kyteSells) => <a>$ {kyteSells}</a>,
-    },
-    {
-      title: "Usuario",
-      dataIndex: "user",
-      key: "user",
-    },
-    {
-      title: "Acciones",
-      dataIndex: "action",
-      key: "action",
-      render: (_, record, index) => (
-        <Space size="middle" key={`action_${record.id}`}>
-          <Tooltip title="Ver detalle">
-            <button
-              className="btn btn-light d-flex align-items-center"
-              onClick={() => _goToDetail(record.id)}
-            >
-              <i className="material-icons">arrow_forward</i>
-            </button>
-          </Tooltip>
-        </Space>
-      ),
-    },
-  ];
-
-  const _goToDetail = (id) => {
-    router.push(`/cashcut/${id}`);
-  };
-
   return (
     <div className="container-fluid">
-      <h1> Corte de caja</h1>
-      <div className="d-flex justify-content-end mb-3">
-        <Button
-          name="Nuevo corte"
-          onClick={() => router.push("/cashcut/new")}
-          icon=""
-        />
-      </div>
-      <Table dataSource={data} columns={columns} />;
+      <h1> Detaller de corte de caja</h1>
+      <pre> {JSON.stringify(props.data)}</pre>
     </div>
   );
 };
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  const { cashcutId } = context.query;
   let user;
 
   if (!session) {
@@ -101,7 +54,12 @@ export async function getServerSideProps(context) {
   let data;
 
   try {
-    data = await HTTP("GET", `/api/v1/cash-cut`, {}, session.accessToken);
+    data = await HTTP(
+      "GET",
+      `/api/v1/cash-cut/${cashcutId}`,
+      {},
+      session.accessToken
+    );
   } catch (err) {
     return {
       redirect: {
