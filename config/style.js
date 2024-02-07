@@ -32,7 +32,7 @@ export const cashCut = [
       { Descripción: "", amount: 0 },
       { Total: 0 },
     ],
-    bills: [
+    tickes: [
       { Valor: 1000, Cantidad: 0 },
       { Valor: 500, Cantidad: 0 },
       { Valor: 200, Cantidad: 0 },
