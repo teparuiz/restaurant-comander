@@ -10,13 +10,12 @@ export const cashCut = [
     cash: 0,
     diffCashCredit: 0,
 
-    shipments: [
-      { Melch: 0 },
-      { Victor: 0 },
-      { Tepa: 0 },
-      { Pops: 0 },
-      { Total: 0 },
-    ],
+    shipments: {
+      Melch: 0,
+      Victor: 0,
+      Tepa: 0,
+      Total: 0,
+    },
     incomes: [
       { description: "Rappi", amount: 0 },
       { description: "Didi", amount: 0 },
