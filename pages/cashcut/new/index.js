@@ -7,12 +7,17 @@ import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCo
 import ExpensesRecordCollapse from "@teparuiz69/components/collapse/ExpensesRecordCollapse";
 import CountCash from "@teparuiz69/components/collapse/CountCash";
 import { Button } from "antd";
+import ShipmentsCollapse from "@teparuiz69/components/collapse/ShipmentsCollapse";
 
 const NewCashCut = (props) => {
   return (
     <div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <SalesRecordCollapse />
+      </div>
+      <div className="divider"></div>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ShipmentsCollapse />
       </div>
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
