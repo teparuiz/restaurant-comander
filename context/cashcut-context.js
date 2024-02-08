@@ -9,25 +9,36 @@ export function CashCutProvider(props) {
   };
 
   const [sales, setSales] = useState("");
-  const [income, setIncome] = useState([]);
-  const [expense, setExpense] = useState([]);
-  const [shipments, setShipments] = useState([])
+  const [incomes, setIncomes] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+  const [shipments, setShipments] = useState({});
+  const [tickets, setTickets] = useState({});
+  const [coins, setCoins] = useState({});
 
   const reset = () => {
     setSales([]);
-    setIncome([]);
-    setExpense([]);
-    setShipments([]);
+    setIncomes([]);
+    setExpenses([]);
+    setShipments({});
+    setTickets({});
+    setCoins({});
   };
 
   const save = (obj) => {
     if (obj && obj.sales) setSales({ ...obj.sales, active: true, save: true });
 
-    if (obj && obj.income) setIncome(obj.income);
+    if (obj && obj.income) setIncomes(obj.income);
 
-    if (obj && obj.income) setExpense(obj.expense);
+    if (obj && obj.expense) setExpenses(obj.expense);
 
-    if (obj && obj.shipments) setShipments(obj.shipments);
+    if (obj && obj.shipments)
+      setShipments({ ...obj.shipments, active: true, save: true });
+
+    if (obj && obj.tickets)
+      setShipments({ ...obj.tickets, active: true, save: true });
+
+    if (obj && obj.coins)
+      setShipments({ ...obj.coins, active: true, save: true });
   };
 
   const value = useMemo(() => {
@@ -36,14 +47,18 @@ export function CashCutProvider(props) {
       reset: reset,
       getSales: sales,
       saveSales: setSales,
-      getIncome: income,
-      saveIncome: setIncome,
-      getExpense: expense,
-      saveExpense: setExpense,
+      getIncome: incomes,
+      saveIncome: setIncomes,
+      getExpense: expenses,
+      saveExpense: setExpenses,
       getShipments: shipments,
       saveShipments: setShipments,
+      getTickets: tickets,
+      saveTickets: setTickets,
+      getCoins: coins,
+      saveCoins: setCoins,
     };
-  }, [sales, income, reset, expense, shipments]);
+  }, [sales, incomes, reset, expenses, shipments, coins, tickets]);
 
   return <MenuContext.Provider value={value} {...props} />;
 }
