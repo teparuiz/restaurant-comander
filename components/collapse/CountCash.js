@@ -2,14 +2,19 @@ import { Button } from "antd";
 import React, { useState } from "react";
 import Input from "../form/Input";
 import { Controller, useForm } from "react-hook-form";
+import ButtonComander from "../form/ButtonComander";
+import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const CountCash = (props) => {
-  const [data, setData] = useState(0);
+  const { saveTickets, saveCoins, getCoins, getTickets} = useCashCut();
+
   const { control, handleSubmit, watch } = useForm();
 
   const save = (data) => {
     setData(data);
   };
+
+
 
   const _summaryBills = () => {
     let total =
@@ -45,8 +50,8 @@ const CountCash = (props) => {
       <form onSubmit={handleSubmit(save)}>
         <div className="d-flex">
          
-          <div className="d-flex justify-content-between pt-2">
-            <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex justify-content-between p-2">
+            <div className="d-flex flex-wrap justify-content-center p-2">
               <Controller
                 name="500"
                 control={control}
@@ -105,10 +110,11 @@ const CountCash = (props) => {
                 )}
               />
             </div>
+            <Button name="Guardar Billetes" />
           </div>
 
-          <div className="d-flex justify-content-between pt-2">
-            <div className="d-flex flex-wrap justify-content-center">
+          <div className="d-flex justify-content-between p-2">
+            <div className="d-flex flex-wrap justify-content-center p-2">
               <Controller
                 name="coins20"
                 control={control}
@@ -143,7 +149,7 @@ const CountCash = (props) => {
                 )}
               />
             </div>
-            <div className="d-flex flex-wrap justify-content-center">
+            <div className="d-flex flex-wrap justify-content-center p-2">
               <Controller
                 name="coins2"
                 control={control}
@@ -178,9 +184,10 @@ const CountCash = (props) => {
                 )}
               />
             </div>
+            <Button name="Guardar monedas" />
           </div>
         </div>
-      </form>
+         </form>
 <div className="divider"></div>
       <div>Total Billetes: $ {_summaryBills()}</div>
       <div>Total monedas: $ {_summaryCoins()}</div>

@@ -16,13 +16,15 @@ const NewCashCut = (props) => {
         <SalesRecordCollapse />
       </div>
       <div className="divider"></div>
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div className="row">
+    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
         <ShipmentsCollapse />
       </div>
-      <div className="divider"></div>
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        
         <ExpensesRecordCollapse />
       </div>
+    </div>
 
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
