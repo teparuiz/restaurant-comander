@@ -7,7 +7,7 @@ export function CashCutProvider(props) {
     active: false,
     save: false,
   };
-  const [sales, setSales] = useState("");
+  const [sales, setSales] = useState({});
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [shipments, setShipments] = useState([]);
@@ -15,7 +15,7 @@ export function CashCutProvider(props) {
   const [coins, setCoins] = useState({});
 
   const reset = () => {
-    setSales([]);
+    setSales({});
     setIncomes([]);
     setExpenses([]);
     setShipments([]);

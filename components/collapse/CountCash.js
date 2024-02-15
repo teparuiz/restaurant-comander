@@ -1,37 +1,56 @@
 import { Button } from "../form/Button";
 import React, { useState } from "react";
 import Input from "../form/Input";
-import { Controller, useForm } from "react-hook-form";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const CountCash = (props) => {
   const { saveTickets, saveCoins, getCoins, getTickets } = useCashCut();
 
-  const { control, handleSubmit, watch } = useForm();
+  const [bills, setBills] = useState({
+    bill1000: 0,
+    bill500: 0,
+    bill200: 0,
+    bill100: 0,
+    bill50: 0,
+    bill20: 0,
+  });
 
-  const save = (data) => {
-    setData(data);
+  const [coins, setCoins] = useState({
+    coins20: 0,
+    coins10: 0,
+    coins5: 0,
+    coins2:0, 
+    coins1: 0,
+    coins05: 0,
+    other: 0,
+  });
+
+  const save = () => {
+    saveTickets(data); // Suponiendo que `data` tiene la información que quieres guardar para los billetes
+    saveCoins(data); // Suponiendo que `data` tiene la información que quieres guardar para las monedas
   };
 
   const _summaryBills = () => {
     let total =
-      parseFloat(watch("500")) * 500 +
-      parseFloat(watch("200")) * 200 +
-      parseFloat(watch("100")) * 100 +
-      parseFloat(watch("50")) * 50 +
-      parseFloat(watch("20")) * 20;
+      bills.bill1000 * 1000 +
+      bills.bill500 * 500 +
+      bills.bill200 * 200 +
+      bills.bill100 * 100 +
+      bills.bill50 * 50 +
+      bills.bill20 * 20;
 
     return total || 0;
   };
 
   const _summaryCoins = () => {
     let total =
-      parseFloat(watch("coins20")) * 20 +
-      parseFloat(watch("coins10")) * 10 +
-      parseFloat(watch("coins5")) * 5 +
-      parseFloat(watch("coins2")) * 2 +
-      parseFloat(watch("coins1")) * 1 +
-      parseFloat(watch("coins0.5")) * 0.5;
+      coins.coins20 * 20 +
+      coins.coins10 * 10 +
+      coins.coins5 * 5 +
+      coins.coins2 * 2 +
+      coins.coins1 * 1 +
+      coins.coins05 * 0.5 +
+      coins.other;
 
     return total || 0;
   };
@@ -39,171 +58,143 @@ const CountCash = (props) => {
   return (
     <div className="container_table_card">
       <h3> Arqueo caja </h3>
-      <div className="d-flex justify-content-around">
-        <h5>Billetes</h5>
-        <h5>Monedas</h5>
+      <div className="row mb-5">
+        <div className="d-flex justify-content-between">
+          <Input
+            value={bills.bill1000}
+            onChange={(bill1000) =>
+              setBills({
+                ...bills,
+                bill1000,
+              })
+            }
+            title="Billete $1000"
+          />
+          <Input
+            value={bills.bill500}
+            onChange={(bill500) =>
+              setBills({
+                ...bills,
+                bill500,
+              })
+            }
+            title="Billete $500"
+          />
+          <Input
+            value={bills.bill200}
+            onChange={(bill200) =>
+              setBills({
+                ...bills,
+                bill200,
+              })
+            }
+            title="Billete $200"
+          />
+          <Input
+            value={bills.bill100}
+            onChange={(bill100) =>
+              setBills({
+                ...bills,
+                bill100,
+              })
+            }
+            title="Billete $100"
+          />
+          <Input
+            value={bills.bill20}
+            onChange={(bill20) =>
+              setBills({
+                ...bills,
+                bill20,
+              })
+            }
+            title="Billete $20"
+          />
+          <Button name="Guardar Billetes" />
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit(save)}>
-        <div className="d-flex">
-          <div className="d-flex justify-content-between p-2">
-            <div className="d-flex flex-wrap justify-content-center p-2">
-              <Controller
-                name="500"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 500"
-                    placeholder="Ingresa los billetes de 500"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="200"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 200"
-                    placeholder="Ingresa los billetes de 200"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="100"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 100"
-                    placeholder="Ingresa los billetes de 100"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="d-flex flex-wrap justify-content-center">
-              <Controller
-                name="50"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 50"
-                    placeholder="Ingresa los billetes de 50"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="20"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 20"
-                    placeholder="Ingresa los billetes de 20"
-                    {...field}
-                  />
-                )}
-              />
-              <Button name="Guardar Billetes" />
-            </div>
-          </div>
+      <div className="row mb-5">
+        <div className="d-flex justify-content-between">
+          <Input
+            value={coins.coins20}
+            onChange={(coins20) =>
+              setCoins({
+                ...coins,
+                coins20,
+              })
+            }
+            title="Moneda $20"
+          />
 
-          <div className="d-flex justify-content-between p-2">
-            <div className="d-flex flex-wrap justify-content-center p-2">
-              <Controller
-                name="coins20"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 20"
-                    placeholder="Ingresa los billetes de 500"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="coins10"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 10"
-                    placeholder="Ingresa los billetes de 200"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="coins5"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 5"
-                    placeholder="Ingresa los billetes de 100"
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-            <div className="d-flex flex-wrap justify-content-center p-2">
-              <Controller
-                name="coins2"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 2"
-                    placeholder="Ingresa los billetes de 100"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="coins1"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 1"
-                    placeholder="Ingresa los billetes de 50"
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                name="coins0.5"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    title="$ 0.50"
-                    placeholder="Ingresa los billetes de 20"
-                    {...field}
-                  />
-                )}
-              />
-             
-         
-            </div>
-          <div className="d-flex flex-wrap justify-content-center p-2">
-          <Controller
-              name="other"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  title="Otro"
-                  placeholder="Otro tipo de monedas o billetes"
-                  {...field}
-                />
-              )}
-              
-              />
-            <Button name="Guardar monedas" />
-          </div>
-          </div>
+          <Input
+            value={coins.coins10}
+            onChange={(coins10) =>
+              setCoins({
+                ...coins,
+                coins10,
+              })
+            }
+            title="Moneda $10"
+          />
+
+          <Input
+            value={coins.coins5}
+            onChange={(coins5) =>
+              setCoins({
+                ...coins,
+                coins5,
+              })
+            }
+            title="Moneda $5"
+          />
+
+          <Input
+            value={coins.coins1}
+            onChange={(coins1) =>
+              setCoins({
+                ...coins,
+                coins1,
+              })
+            }
+            title="Moneda $1"
+          />
+
+          <Input
+            value={coins.coins05}
+            onChange={(coins05) =>
+              setCoins({
+                ...coins,
+                coins05,
+              })
+            }
+            title="Moneda $0.50"
+          />
+
+          <Input
+            value={coins.other}
+            onChange={(other) =>
+              setCoins({
+                ...coins,
+                other,
+              })
+            }
+            title="Otro"
+          />
+
+          <Button name="Guardar monedas"  />
         </div>
-      </form>
-      <div className="divider"></div>
-      <div>Total Billetes: $ {_summaryBills()}</div>
-      <div>Total monedas: $ {_summaryCoins()}</div>
-      <div>Total: $ {_summaryBills() + _summaryCoins()}</div>
+      </div>
+
+      <h5>
+        <b>Total Billetes: $ {_summaryBills()}</b>
+      </h5>
+      <h5>
+        <b>Total monedas: $ {_summaryCoins()}</b>
+      </h5>
+      <h5>
+        <b>Total: $ {_summaryBills() + _summaryCoins()}</b>
+      </h5>
     </div>
   );
 };
