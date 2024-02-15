@@ -1,65 +1,116 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../form/Input";
 import { Button } from "../form/Button";
+import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const SalesRecordCollapse = () => {
-  const [salesRecord, setSalesRecord] = useState("");
-  const [initCash, setInitCash] = useState(0);
-  const [endCash, setEndCash] = useState(0);
-  const [yesterdayCash, setYesterdayCash] = useState(0);
+  const { getSales, saveSales } = useCashCut();
+  const [isEdit, setIsEdit] = useState(true);
+  const [salesRecord, setSalesRecord] = useState(0);
+  const [initCash, setInitCash] = useState(1000);
+  const [endCash, setEndCash] = useState(1000);
 
   const _save = () => {
     const obj = {
-      salesRecord,
+      salesRecord: parseFloat(salesRecord),
       initCash,
       endCash,
-      yesterdayCash,
+      active: true,
+      save: true,
     };
 
-    console.log(obj);
+    saveSales(obj);
+    setIsEdit(false);
   };
+
+  useEffect(() => {
+    if (getSales.active && getSales.save) {
+      setIsEdit(false);
+      setSalesRecord(getSales.salesRecord);
+      setInitCash(getSales.initCash);
+      setEndCash(getSales.endCash);
+    } else {
+      setIsEdit(true);
+    }
+  }, [getSales]);
+
+  useEffect(() => {
+    if (isEdit) {
+      saveSales({
+        ...getSales,
+        save: false,
+      });
+    }
+  }, [isEdit]);
 
   return (
     <div className="container_table_card">
       <h3> Ventas </h3>
 
-      <div className="d-flex col">
-        <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
-          <Input
-            value={salesRecord}
-            onChange={setSalesRecord}
-            placeholder="Ingresa la venta KYTE del día"
-            title="Venta KITE"
-          />
-        </div>
-        <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
-          <Input
-            value={initCash}
-            onChange={setInitCash}
-            placeholder="Ingresa la caja inicial del dia"
-            title="Caja Inicial"
-          />
-        </div>
-        <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
-          <Input
-            value={endCash}
-            onChange={setEndCash}
-            placeholder="Ingresa la caja final del día"
-            title="Caja Final"
-          />
-        </div>
-        <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
+      {isEdit ? (
+        <div className="row">
+          <div className="d-flex col">
+            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+              <Input
+                value={salesRecord}
+                onChange={setSalesRecord}
+                type="number"
+                placeholder="Ingresa la venta KYTE del día"
+                title="Venta KYTE"
+              />
+            </div>
+            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+              <Input
+                value={initCash}
+                onChange={setInitCash}
+                placeholder="Ingresa la caja inicial del dia"
+                title="Caja Inicial"
+              />
+            </div>
+            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+              <Input
+                value={endCash}
+                onChange={setEndCash}
+                placeholder="Ingresa la caja final del día"
+                title="Caja Final"
+              />
+            </div>
+            {/* <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
           <Input
             value={yesterdayCash}
             onChange={setYesterdayCash}
             placeholder="Ingresa la caja final de ayer"
             title="Caja de ayer"
           />
+        </div> */}
+          </div>
+          <div className="d-flex justify-content-end">
+            <Button name="Guardar" onClick={_save} />
+          </div>
         </div>
-      </div>
-      <div className="d-flex justify-content-end">
-        <Button name="Guardar" onClick={_save} />
-      </div>
+      ) : (
+        <>
+          <div className="col col-12">
+            <div className="row">
+              <div className="col col-4 col-md-4 col-lg-4">
+                <b>Venta KYTE:</b>
+                <p> {getSales.salesRecord}</p>
+              </div>
+              <div className="col col-4 col-md-4 col-lg-4">
+                <b>Caja inicial:</b>
+                <p> {getSales.initCash}</p>
+              </div>
+              <div className="col col-4 col-md-4 col-lg-4">
+                <b>Caja Final:</b>
+                <p> {getSales.endCash}</p>
+              </div>
+            </div>
+          </div>
+          <div className="d-flex justify-content-end">
+            <Button name="Editar" onClick={() => setIsEdit(true)} />
+          </div>
+        </>
+      )}
     </div>
   );
 };
