@@ -21,14 +21,28 @@ const NewCashCut = (props) => {
     getTotalCash,
   } = useCashCut();
 
+
   const _save = () => {
+    const getCredit = getIncome.filter((i) => i.description !==  3).reduce((a, b) =>a + parseFloat(b.total), 0 ) 
+
+
     const obj = {
-      getTickets,
-      getShipments,
-      getSales,
-      getCoins,
-      getExpense,
-      getTotalCash
+    comments: getSales.comments,
+    user: props.user.firstName ,
+    endDay: getSales.endCash,
+    startDay: getSales.initCash,
+    credit: getCredit,
+    diffCashCredit:  getTotalCash - getCredit,
+    cash: getTotalCash ,
+    total: getSales.salesRecord,
+    kyteSells: getSales.salesRecord ,
+    date:new Date(),
+    shipments: getShipments,
+    incomes:getIncome,
+    expenses:getExpense,
+    tickets:getTickets,
+    coins:getCoins,     
+
     };
 
     console.log(obj);

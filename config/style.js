@@ -56,119 +56,78 @@ export const cashCut = [
 export const obj = {
   getTickets: {
     bill1000: 0,
-
     bill500: 0,
-
     bill200: 2,
-
     bill100: 3,
-
     bill50: 0,
-
     bill20: 0,
-
     active: true,
-
     save: true,
   },
 
   getShipments: [
-    {
-      id: "47960123-924d-4046-88a7-a0938b178431",
-
-      total: "95",
-
-      user: "Melch",
-    },
+    { id: "c884bc50-84d0-4644-9f3f-23db600cb3cf", total: "95", user: "Melch" },
   ],
 
   getSales: {
     salesRecord: 3235,
-
     initCash: 1000,
-
     endCash: 1000,
-
     active: true,
-
     save: true,
   },
 
   getCoins: {
     coins20: 0,
-
     coins10: 5,
-
     coins5: 9,
-
     coins2: 0,
-
     coins1: 5,
-
     coins05: 0,
-
     other: 200,
-
     active: true,
-
     save: true,
   },
 
   getExpense:
     Array(6)[
       ({
-        id: "2c0312d6-f24e-4511-ad48-32f9ee7e2252",
-
+        id: "bee9a421-cb98-429c-8679-09055004a8ec",
         description: "Lechuga",
-
         total: "132",
-
         provider: "WALMART",
       },
       {
-        id: "aee9f41e-c270-48eb-8379-d6be596e5f2b",
-
-        description: "Carne ",
-
-        total: 0,
-
+        id: "5fd0de4e-a04e-4a5b-ae4a-497d5283146b",
+        description: "MERCADO PAGO 1143",
+        total: "0",
         provider: "COSTCO",
       },
       {
-        id: "0650102a-aed6-4c70-bd4d-e82b6b536654",
-
-        description: "Debe",
-
+        id: "e3445d11-dee4-499d-961b-031c4990d62c",
+        description: "DEbe Rodrigo",
         total: "104",
-
-        provider: "Rodrigo",
+        provider: "WIPBURGERS",
       },
       {
-        id: "2b1409b7-5f20-41ac-aa7a-56ab089e2927",
-
-        description: "Pago Felipe",
-
+        id: "8a35a429-a9b3-4f18-941f-82154e719058",
+        description: "Felipe Sueldo",
         total: "300",
-
-        provider: "Felipe",
+        provider: "WIPBURGERS",
       },
       {
-        id: "fa97bb18-a62f-4087-96c7-a3551b51bf0a",
-
-        description: "DInero para bolsa de compras",
-
+        id: "981c72da-7382-4ee4-8a3b-dccb02bc030b",
+        description: "COMPRAS",
         total: "1059",
-
-        provider: "Bolsa compras",
+        provider: "WIP BURGERS",
       },
       {
-        id: "c50f957a-121a-464d-9d3a-afcab4b1f6cf",
-
-        description: "El 10%",
-
+        id: "d46dd3ed-b321-4c3f-9160-aa7f45bfa99d",
+        description: "10 %",
         total: "324",
-
-        provider: "10%",
+        provider: "WIP BURGERS",
       })
     ],
+
+  getTotalCash: 1000,
 };

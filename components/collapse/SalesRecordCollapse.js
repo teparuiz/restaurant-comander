@@ -9,12 +9,14 @@ const SalesRecordCollapse = () => {
   const [salesRecord, setSalesRecord] = useState(0);
   const [initCash, setInitCash] = useState(1000);
   const [endCash, setEndCash] = useState(1000);
+  const [comments, setComments] = useState("");
 
   const _save = () => {
     const obj = {
       salesRecord: parseFloat(salesRecord),
       initCash,
       endCash,
+      comments,
       active: true,
       save: true,
     };
@@ -26,6 +28,7 @@ const SalesRecordCollapse = () => {
   useEffect(() => {
     if (getSales.active && getSales.save) {
       setIsEdit(false);
+      setComments(getSales.comments);
       setSalesRecord(getSales.salesRecord);
       setInitCash(getSales.initCash);
       setEndCash(getSales.endCash);
@@ -50,7 +53,7 @@ const SalesRecordCollapse = () => {
       {isEdit ? (
         <div className="row">
           <div className="d-flex col">
-            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+            <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
               <Input
                 value={salesRecord}
                 onChange={setSalesRecord}
@@ -59,7 +62,7 @@ const SalesRecordCollapse = () => {
                 title="Venta KYTE"
               />
             </div>
-            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+            <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
               <Input
                 value={initCash}
                 onChange={setInitCash}
@@ -67,12 +70,20 @@ const SalesRecordCollapse = () => {
                 title="Caja Inicial"
               />
             </div>
-            <div className="col col-xs-12 col-md-6 col-lg-4 p-3">
+            <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
               <Input
                 value={endCash}
                 onChange={setEndCash}
                 placeholder="Ingresa la caja final del día"
                 title="Caja Final"
+              />
+            </div>
+            <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
+              <Input
+                value={comments}
+                onChange={setComments}
+                placeholder="Añade los comentarios"
+                title="Comentarios"
               />
             </div>
             {/* <div className="col col-xs-12 col-md-6 col-lg-3 p-3">
@@ -92,17 +103,21 @@ const SalesRecordCollapse = () => {
         <>
           <div className="col col-12">
             <div className="row">
-              <div className="col col-4 col-md-4 col-lg-4">
+              <div className="col col-md-4 col-lg-3">
                 <b>Venta KYTE:</b>
                 <p> {getSales.salesRecord}</p>
               </div>
-              <div className="col col-4 col-md-4 col-lg-4">
+              <div className="col col-md-4 col-lg-3">
                 <b>Caja inicial:</b>
                 <p> {getSales.initCash}</p>
               </div>
-              <div className="col col-4 col-md-4 col-lg-4">
+              <div className="col col-md-4 col-lg-3">
                 <b>Caja Final:</b>
                 <p> {getSales.endCash}</p>
+              </div>
+              <div className="col col-md-4 col-lg-3">
+                <b>Comentarios:</b>
+                <p> {getSales.comments}</p>
               </div>
             </div>
           </div>
