@@ -13,6 +13,7 @@ export function CashCutProvider(props) {
   const [shipments, setShipments] = useState([]);
   const [tickets, setTickets] = useState({});
   const [coins, setCoins] = useState({});
+  const [totalCash, setTotalCash] =useState(''); 
 
   const reset = () => {
     setSales({});
@@ -21,6 +22,7 @@ export function CashCutProvider(props) {
     setShipments([]);
     setTickets({});
     setCoins({});
+    setTotalCash('')
   };
 
   const save = (obj) => {
@@ -35,6 +37,8 @@ export function CashCutProvider(props) {
     if (obj && obj.tickets) setTickets({ ...obj.tickets, active: true, save: true });
 
     if (obj && obj.coins) setCoins({ ...obj.coins, active: true, save: true });
+
+    if(obj && obj.totalCash) setTotalCash(obj.totalCash);
   };
 
   const value = useMemo(() => {
@@ -53,8 +57,10 @@ export function CashCutProvider(props) {
       saveTickets: setTickets,
       getCoins: coins,
       saveCoins: setCoins,
+      getTotalCash:totalCash,
+      saveTotalCash:setTotalCash,  
     };
-  }, [sales, incomes, reset, expenses, shipments, coins, tickets]);
+  }, [sales, incomes, reset, expenses, shipments, coins, tickets, totalCash]);
 
   return <MenuContext.Provider value={value} {...props} />;
 }

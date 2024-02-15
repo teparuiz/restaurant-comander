@@ -4,7 +4,7 @@ import Input from "../form/Input";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const CountCash = (props) => {
-  const { saveTickets, saveCoins, getCoins, getTickets } = useCashCut();
+  const { saveTickets, saveCoins, getCoins, getTickets, saveTotalCash } = useCashCut();
 
   const [bills, setBills] = useState({
     bill1000: 0,
@@ -122,6 +122,19 @@ const CountCash = (props) => {
 
     return total || 0;
   };
+
+  const _summaryTotal =() => 
+  {
+    const total = _summaryBills() + _summaryCoins();
+    return total;
+
+  }
+  
+  useEffect(() => 
+  {
+    saveTotalCash(_summaryTotal())
+
+  }, [bills, coins])
 
   return (
     <div className="container_table_card">
@@ -387,7 +400,7 @@ const CountCash = (props) => {
         <b>Total monedas: $ {_summaryCoins()}</b>
       </h5>
       <h5>
-        <b>Total: $ {_summaryBills() + _summaryCoins()}</b>
+        <b>Total: $ {_summaryTotal()}</b>
       </h5>
     </div>
   );

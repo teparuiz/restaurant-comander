@@ -18,6 +18,7 @@ const NewCashCut = (props) => {
     getCoins,
     getExpense,
     getIncome,
+    getTotalCash,
   } = useCashCut();
 
   const _save = () => {
@@ -27,6 +28,7 @@ const NewCashCut = (props) => {
       getSales,
       getCoins,
       getExpense,
+      getTotalCash
     };
 
     console.log(obj);
@@ -42,6 +44,7 @@ const NewCashCut = (props) => {
     const incomes = getIncome.reduce((a, b) => a + parseFloat(b.total), 0);
     return incomes;
   };
+
 
   return (
     <div>
@@ -75,6 +78,9 @@ const NewCashCut = (props) => {
             </h5>
             <h5>
               Ingresos:<b>$ {_summaryIncome()}</b>{" "}
+            </h5>
+            <h5>
+              Efectivo total: <b> $ {getTotalCash} </b> 
             </h5>
             <h5>
               Caja: <b>$ {getSales.endCash}</b>

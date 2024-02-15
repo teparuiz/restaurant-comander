@@ -1,18 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IncomeCard from "../card/IncomeCard";
 import ModalIncome from "../modal/Income/ModalIncome";
 import { useCashCut } from "../../context/cashcut-context";
 import { findList, payMethodLabel } from "../../config/utils";
-import { payMethod } from "@teparuiz69/config/const";
 import { Button } from "../form/Button";
+import { v4 as uuidv4 } from "uuid";
+import { payMethod } from "@teparuiz69/config/const";
 
 const IncomeRecordCollapse = () => {
-  const { getIncome, saveIncome } = useCashCut();
-  const [incomeRecord, setIncomeRecord] = useState("");
+  const { getIncome, saveIncome, getTotalCash, getTickets, getCoins } =
+    useCashCut();
   const [visible, setVisible] = useState({
     visible: false,
     data: false,
   });
+
+  useEffect(() => {
+    if (getTickets.save && getCoins.save) {
+      const obj = {
+        id: uuidv4(),
+        description: 3,
+        total: getTotalCash,
+      };
+
+      let idx = getIncome.map((i) => i.id).indexOf(obj.id);
+
+      if (idx === -1) saveIncome([...getIncome, obj]);
+      else
+        saveIncome([
+          ...getIncome.slice(0, idx),
+          obj,
+          ...getIncome.slice(idx + 1),
+        ]);
+    }
+  }, [getTickets, getCoins, getTotalCash]);
 
   const _onClose = (reload = false) => {
     setVisible({ visible: false, data: false });
@@ -52,7 +73,6 @@ const IncomeRecordCollapse = () => {
         <Button
           name="Añadir ingreso"
           onClick={() => setVisible({ visible: true, data: false })}
-        
         />
       </div>
       <ModalIncome
