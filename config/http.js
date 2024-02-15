@@ -9,7 +9,7 @@ api.interceptors.request.use(async (config) => {
 	const session = await getSession();
 
 	if (session && session.accessToken)
-		config.headers.Authorization = `${session.accessToken}`;
+		config.headers.Authorization = `Bearer ${session.accessToken}`;
 
 	return config;
 });

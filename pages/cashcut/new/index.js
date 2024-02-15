@@ -9,6 +9,9 @@ import CountCash from "@teparuiz69/components/collapse/CountCash";
 import { Button } from "@teparuiz69/components/form/Button";
 import ShipmentsCollapse from "@teparuiz69/components/collapse/ShipmentsCollapse";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
+import { HTTP_REQUEST } from "@teparuiz69/config/http";
+import axios from "axios";
+import dayjs from "dayjs";
 
 const NewCashCut = (props) => {
   const {
@@ -23,30 +26,32 @@ const NewCashCut = (props) => {
 
 
   const _save = () => {
-    const getCredit = getIncome.filter((i) => i.description !==  3).reduce((a, b) =>a + parseFloat(b.total), 0 ) 
-
+    const getCredit = getIncome
+      .filter((i) => i.description !== 3)
+      .reduce((a, b) => a + parseFloat(b.total), 0);
 
     const obj = {
-    comments: getSales.comments,
-    user: props.user.firstName ,
-    endDay: getSales.endCash,
-    startDay: getSales.initCash,
-    credit: getCredit,
-    diffCashCredit:  getTotalCash - getCredit,
-    cash: getTotalCash ,
-    total: getSales.salesRecord,
-    kyteSells: getSales.salesRecord ,
-    date:new Date(),
-    shipments: getShipments,
-    incomes:getIncome,
-    expenses:getExpense,
-    tickets:getTickets,
-    coins:getCoins,     
-
+      comments: getSales.comments,
+      user: props.user.firstName,
+      endDay: parseFloat(getSales.endCash),
+      startDay: parseFloat(getSales.initCash),
+      credit: getCredit,
+      diffCashCredit: getTotalCash - getCredit,
+      cash: getTotalCash,
+      kyteSells: parseFloat(getSales.salesRecord),
+      date: dayjs(new Date()).format('YYYY-MM-DD'),
+      shipments: getShipments,
+      incomes: getIncome,
+      expenses: getExpense,
+      tickets: getTickets,
+      coins: getCoins,
     };
 
-    console.log(obj);
+    HTTP("POST", `/api/v1/cash-cut`, obj)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
+
 
   const _summaryExpense = () => {
     const expenses = getExpense.reduce((a, b) => a + parseFloat(b.total), 0);

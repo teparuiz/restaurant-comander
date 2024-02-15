@@ -118,7 +118,7 @@ const CountCash = (props) => {
       coins.coins2 * 2 +
       coins.coins1 * 1 +
       coins.coins05 * 0.5 +
-      coins.other;
+      parseFloat(coins.other);
 
     return total || 0;
   };
