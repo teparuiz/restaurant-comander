@@ -189,6 +189,8 @@ const CountCash = (props) => {
               }
               title="Billete $20"
             />
+          </div>
+          <div className="d-flex justify-content-end mt-3 mb-3">
             <Button name="Guardar Billetes" onClick={_saveBills} />
           </div>
         </div>
@@ -279,6 +281,16 @@ const CountCash = (props) => {
               }
               title="Moneda $5"
             />
+            <Input
+              value={coins.coins2}
+              onChange={(coins2) =>
+                setCoins({
+                  ...coins,
+                  coins2,
+                })
+              }
+              title="Moneda $2"
+            />
 
             <Input
               value={coins.coins1}
@@ -312,56 +324,58 @@ const CountCash = (props) => {
               }
               title="Otro"
             />
+          </div>
 
+          <div className="d-flex justify-content-end mt-3">
             <Button name="Guardar monedas" onClick={_saveCoins} />
           </div>
         </div>
       ) : (
         <div className="col col-12">
           <div className="row mt-4">
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $20</b>
               <p>
                 {getCoins.coins20} x $ 20 =<b> $ {getCoins.coins20 * 20}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $10</b>
               <p>
                 {getCoins.coins10} x $ 10 =<b> $ {getCoins.coins10 * 10}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $5</b>
               <p>
                 {getCoins.coins5} x $ 5 = <b>$ {getCoins.coins5 * 5}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $2</b>
               <p>
                 {getCoins.coins2} x $ 2 = <b>$ {getCoins.coins2 * 2}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $1</b>
               <p>
                 {getCoins.coins1} x $ 1 = <b>$ {getCoins.coins1 * 1}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Moneda $0.50</b>
               <p>
                 {getCoins.coins05} x $ 0.50 =<b> $ {getCoins.coins05 * 0.5}</b>
               </p>
             </div>
-            <div className="col col-4 col-md-4 col-lg-4">
+            <div className="col col-4 col-md-4 col-lg-3">
               <b>Otro</b>
               <p>$ {getCoins.other}</p>
             </div>
-            <div className="d-flex justify-content-end">
-              <Button name="Editar" onClick={() => setIsEditCoins(true)} />
-            </div>
+          </div>
+          <div className="d-flex justify-content-end">
+            <Button name="Editar" onClick={() => setIsEditCoins(true)} />
           </div>
         </div>
       )}

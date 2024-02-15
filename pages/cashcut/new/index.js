@@ -6,16 +6,49 @@ import SalesRecordCollapse from "@teparuiz69/components/collapse/SalesRecordColl
 import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCollapse";
 import ExpensesRecordCollapse from "@teparuiz69/components/collapse/ExpensesRecordCollapse";
 import CountCash from "@teparuiz69/components/collapse/CountCash";
-import { Button } from "antd";
+import { Button } from "@teparuiz69/components/form/Button";
 import ShipmentsCollapse from "@teparuiz69/components/collapse/ShipmentsCollapse";
+import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const NewCashCut = (props) => {
+  const {
+    getTickets,
+    getShipments,
+    getSales,
+    getCoins,
+    getExpense,
+    getIncome,
+  } = useCashCut();
+
+  const _save = () => {
+    const obj = {
+      getTickets,
+      getShipments,
+      getSales,
+      getCoins,
+      getExpense,
+    };
+
+    console.log(obj);
+  };
+
+  const _summaryExpense = () => {
+    const expenses = getExpense.reduce((a, b) => a + parseFloat(b.total), 0);
+
+    return expenses;
+  };
+
+  const _summaryIncome = () => {
+    const incomes = getIncome.reduce((a, b) => a + parseFloat(b.total), 0);
+    return incomes;
+  };
+
   return (
     <div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <SalesRecordCollapse />
       </div>
-
+      <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <ShipmentsCollapse />
       </div>
@@ -25,23 +58,30 @@ const NewCashCut = (props) => {
       </div>
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <IncomeRecordCollapse />
-      </div>
-      <div className="divider"></div>
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <CountCash />
       </div>
-      <div className="row sticky_bottom force_sticky  mt-4">
-        <div className="col col-12">
-          <div className="cashcut_footer">
-            <div className="d-flex-column">
-              <p>Esperado: $ 6,249.50</p>
-              <p>Creditos: $ 198.0</p>
-              <p>Efectivo total: $6, 051.50</p>
-              <p> Diferencia: $ 48.00 </p>{" "}
-              {`//**TODO diferencia si es menor debbe estar en rojo y si es mayor en warning, si queda cero es ok o sea en verde */`}
-            </div>
-            <Button title="Guardar" type="primary" />
+      <div className="divider"></div>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+        <IncomeRecordCollapse />
+      </div>
+      <div className="row sticky_bottom force_sticky  p-5">
+        <div className="d-flex justify-content-between align-item-center">
+          <div className="">
+            <h5>
+              VENTA TOTAL: <b>${getSales.salesRecord} </b>
+            </h5>
+            <h5>
+              Gastos: <b>$ {_summaryExpense()} </b>
+            </h5>
+            <h5>
+              Ingresos:<b>$ {_summaryIncome()}</b>{" "}
+            </h5>
+            <h5>
+              Caja: <b>$ {getSales.endCash}</b>
+            </h5>
+          </div>
+          <div>
+            <Button name="Guardar corte de caja" onClick={_save} />
           </div>
         </div>
       </div>
