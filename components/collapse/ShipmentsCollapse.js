@@ -2,37 +2,66 @@ import React, { useState } from "react";
 import Input from "../form/Input";
 import { Button } from "../form/Button";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
+import ModalShipments from "../modal/Income/ModalShipments";
+import ShipmentsCard from "../card/ShipmentsCard";
+import { findList } from "@teparuiz69/config/utils";
 
 const ShipmentsCollapse = () => {
-  const [user, setUser] = useState("");
-  const [totalShiptment, setTotalShiptment] = useState("");
   const { getShipments, saveShipments } = useCashCut();
-  const save = () => {
-    const obj = { user, totalShiptment };
 
-    saveShipments(obj);
+  const [visible, setVisible] = useState({
+    visible: false,
+    data: false,
+  });
+
+  const _onClose = (reload = false) => {
+    setVisible({ visible: false, data: false });
+
+    if (reload) {
+      let idx = getShipments.map((i) => i.id).indexOf(reload.id);
+      if (idx === -1) saveShipments([...getShipments, reload]);
+      else
+        saveShipments([
+          ...getShipments.slice(0, idx),
+          reload,
+          ...getShipments.slice(idx + 1),
+        ]);
+    }
   };
 
-  console.log(getShipments);
+  const _trash = (index) => {
+    saveShipments([
+      ...getShipments.slice(0, index),
+      ...getShipments.slice(index + 1),
+    ]);
+  };
 
   return (
-    <div>
-      <h5>Envios</h5>
-      <form>
-        <Input
-          title="Repartidor"
-          placeholder="Ingresa quien realizo el envió"
-          onChange={setUser}
-          value={user}
+    <div className="container_table_card">
+      <h3>Envios</h3>
+
+      <div className="d-flex">
+        {getShipments.map((item, index) => (
+          <ShipmentsCard
+            user={item.user}
+            total={item.total}
+            key={index}
+            trash={() => _trash(index)}
+            onEdit={() => setVisible({ visible: true, data: item })}
+          />
+        ))}
+      </div>
+      <div className="d-flex justify-content-end">
+        <Button
+          name="Añadir envio"
+          onClick={() => setVisible({ visible: true, data: false })}
         />
-        <Input
-          title="Total del envió"
-          placeholder="Ingresa el total del envio"
-          onChange={setTotalShiptment}
-          value={totalShiptment}
-        />
-      </form>
-      <Button name="Guardar" onClick={save} />
+      </div>
+      <ModalShipments
+        visible={visible.visible}
+        data={visible.data}
+        onClose={_onClose}
+      />
     </div>
   );
 };

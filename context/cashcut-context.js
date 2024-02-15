@@ -7,11 +7,10 @@ export function CashCutProvider(props) {
     active: false,
     save: false,
   };
-
   const [sales, setSales] = useState("");
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
-  const [shipments, setShipments] = useState({});
+  const [shipments, setShipments] = useState([]);
   const [tickets, setTickets] = useState({});
   const [coins, setCoins] = useState({});
 
@@ -19,7 +18,7 @@ export function CashCutProvider(props) {
     setSales([]);
     setIncomes([]);
     setExpenses([]);
-    setShipments({});
+    setShipments([]);
     setTickets({});
     setCoins({});
   };
@@ -31,14 +30,11 @@ export function CashCutProvider(props) {
 
     if (obj && obj.expense) setExpenses(obj.expense);
 
-    if (obj && obj.shipments)
-      setShipments({ ...obj.shipments, active: true, save: true });
+    if (obj && obj.shipments) setShipments(obj.shipments);
 
-    if (obj && obj.tickets)
-      setShipments({ ...obj.tickets, active: true, save: true });
+    if (obj && obj.tickets) setTickets({ ...obj.tickets, active: true, save: true });
 
-    if (obj && obj.coins)
-      setShipments({ ...obj.coins, active: true, save: true });
+    if (obj && obj.coins) setCoins({ ...obj.coins, active: true, save: true });
   };
 
   const value = useMemo(() => {

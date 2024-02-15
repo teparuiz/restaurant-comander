@@ -44,38 +44,33 @@ const ExpensesRecordCollapse = (props) => {
     ]);
   };
 
-
   return (
     <div className="container_table_card">
       <h3>Egresos</h3>
       <div className="d-flex">
-        <div className="col-6">
-          <h5>Gastos caja</h5>
-          {getExpense.map((item, index) => (
-            <ExpenseCard
-              total={item.total}
-              provider={item.provider}
-              description={item.description}
-              key={index}
-              trash={() => _trash(index)}
-              onEdit={() => setVisible({ visible: true, data: item })}
-            />
-          ))}
-          <div className="d-flex justify-content-center">
-            <Button
-              name="Añadir gastos"
-              onClick={() => setVisible({ visible: true, data: false })}
-            />
-          </div>
-        </div>
+        {getExpense.map((item, index) => (
+          <ExpenseCard
+            total={item.total}
+            provider={item.provider}
+            description={item.description}
+            key={index}
+            trash={() => _trash(index)}
+            onEdit={() => setVisible({ visible: true, data: item })}
+          />
+        ))}
       </div>
-
+      <div className="d-flex justify-content-end">
+        <Button
+          name="Añadir gastos"
+          onClick={() => setVisible({ visible: true, data: false })}
+        />
+      </div>
       <ModalExpense
         visible={visible.visible}
         data={visible.data}
         onClose={_onClose}
       />
-     </div>
+    </div>
   );
 };
 

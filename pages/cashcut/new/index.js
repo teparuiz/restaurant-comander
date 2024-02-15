@@ -15,17 +15,14 @@ const NewCashCut = (props) => {
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <SalesRecordCollapse />
       </div>
-      <div className="divider"></div>
-    <div className="row">
-    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <ShipmentsCollapse />
       </div>
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-        
+      <div className="divider"></div>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <ExpensesRecordCollapse />
       </div>
-    </div>
-
       <div className="divider"></div>
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <IncomeRecordCollapse />
@@ -34,7 +31,6 @@ const NewCashCut = (props) => {
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <CountCash />
       </div>
-      <div className="divider"></div>
       <div className="row sticky_bottom force_sticky  mt-4">
         <div className="col col-12">
           <div className="cashcut_footer">

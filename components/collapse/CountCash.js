@@ -1,20 +1,17 @@
-import { Button } from "antd";
+import { Button } from "../form/Button";
 import React, { useState } from "react";
 import Input from "../form/Input";
 import { Controller, useForm } from "react-hook-form";
-import ButtonComander from "../form/ButtonComander";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const CountCash = (props) => {
-  const { saveTickets, saveCoins, getCoins, getTickets} = useCashCut();
+  const { saveTickets, saveCoins, getCoins, getTickets } = useCashCut();
 
   const { control, handleSubmit, watch } = useForm();
 
   const save = (data) => {
     setData(data);
   };
-
-
 
   const _summaryBills = () => {
     let total =
@@ -41,15 +38,14 @@ const CountCash = (props) => {
 
   return (
     <div className="container_table_card">
-      <h3> Conteo caja </h3>
+      <h3> Arqueo caja </h3>
       <div className="d-flex justify-content-around">
-            <h5>Billetes</h5>
-            <h5>Monedas</h5>
-          </div>
+        <h5>Billetes</h5>
+        <h5>Monedas</h5>
+      </div>
 
       <form onSubmit={handleSubmit(save)}>
         <div className="d-flex">
-         
           <div className="d-flex justify-content-between p-2">
             <div className="d-flex flex-wrap justify-content-center p-2">
               <Controller
@@ -109,8 +105,8 @@ const CountCash = (props) => {
                   />
                 )}
               />
+              <Button name="Guardar Billetes" />
             </div>
-            <Button name="Guardar Billetes" />
           </div>
 
           <div className="d-flex justify-content-between p-2">
@@ -183,12 +179,28 @@ const CountCash = (props) => {
                   />
                 )}
               />
+             
+         
             </div>
+          <div className="d-flex flex-wrap justify-content-center p-2">
+          <Controller
+              name="other"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  title="Otro"
+                  placeholder="Otro tipo de monedas o billetes"
+                  {...field}
+                />
+              )}
+              
+              />
             <Button name="Guardar monedas" />
           </div>
+          </div>
         </div>
-         </form>
-<div className="divider"></div>
+      </form>
+      <div className="divider"></div>
       <div>Total Billetes: $ {_summaryBills()}</div>
       <div>Total monedas: $ {_summaryCoins()}</div>
       <div>Total: $ {_summaryBills() + _summaryCoins()}</div>
