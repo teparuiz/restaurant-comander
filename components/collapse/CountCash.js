@@ -4,7 +4,8 @@ import Input from "../form/Input";
 import { useCashCut } from "@teparuiz69/context/cashcut-context";
 
 const CountCash = (props) => {
-  const { saveTickets, saveCoins, getCoins, getTickets, saveTotalCash } = useCashCut();
+  const { saveTickets, saveCoins, getCoins, getTickets, saveTotalCash } =
+    useCashCut();
 
   const [bills, setBills] = useState({
     bill1000: 0,
@@ -123,18 +124,14 @@ const CountCash = (props) => {
     return total || 0;
   };
 
-  const _summaryTotal =() => 
-  {
+  const _summaryTotal = () => {
     const total = _summaryBills() + _summaryCoins();
     return total;
+  };
 
-  }
-  
-  useEffect(() => 
-  {
-    saveTotalCash(_summaryTotal())
-
-  }, [bills, coins])
+  useEffect(() => {
+    saveTotalCash(_summaryTotal());
+  }, [bills, coins]);
 
   return (
     <div className="container_table_card">
@@ -142,66 +139,85 @@ const CountCash = (props) => {
       {isEditBills ? (
         <div className="row mb-2">
           <div className="d-flex justify-content-between">
-            <Input
-              value={bills.bill1000}
-              onChange={(bill1000) =>
-                setBills({
-                  ...bills,
-                  bill1000,
-                })
-              }
-              title="Billete $1000"
-            />
-            <Input
-              value={bills.bill500}
-              onChange={(bill500) =>
-                setBills({
-                  ...bills,
-                  bill500,
-                })
-              }
-              title="Billete $500"
-            />
-            <Input
-              value={bills.bill200}
-              onChange={(bill200) =>
-                setBills({
-                  ...bills,
-                  bill200,
-                })
-              }
-              title="Billete $200"
-            />
-            <Input
-              value={bills.bill100}
-              onChange={(bill100) =>
-                setBills({
-                  ...bills,
-                  bill100,
-                })
-              }
-              title="Billete $100"
-            />
-            <Input
-              value={bills.bill50}
-              onChange={(bill50) =>
-                setBills({
-                  ...bills,
-                  bill50,
-                })
-              }
-              title="Billete $50"
-            />
-            <Input
-              value={bills.bill20}
-              onChange={(bill20) =>
-                setBills({
-                  ...bills,
-                  bill20,
-                })
-              }
-              title="Billete $20"
-            />
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill1000}
+                onChange={(bill1000) =>
+                  setBills({
+                    ...bills,
+                    bill1000,
+                  })
+                }
+                type="number"
+                title="Billete $1000"
+              />
+            </div>
+
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill500}
+                onChange={(bill500) =>
+                  setBills({
+                    ...bills,
+                    bill500,
+                  })
+                }
+                type="number"
+                title="Billete $500"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill200}
+                onChange={(bill200) =>
+                  setBills({
+                    ...bills,
+                    bill200,
+                  })
+                }
+                type="number"
+                title="Billete $200"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill100}
+                onChange={(bill100) =>
+                  setBills({
+                    ...bills,
+                    bill100,
+                  })
+                }
+                type="number"
+                title="Billete $100"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill50}
+                onChange={(bill50) =>
+                  setBills({
+                    ...bills,
+                    bill50,
+                  })
+                }
+                type="number"
+                title="Billete $50"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2 p-2">
+              <Input
+                value={bills.bill20}
+                onChange={(bill20) =>
+                  setBills({
+                    ...bills,
+                    bill20,
+                  })
+                }
+                type="number"
+                title="Billete $20"
+              />
+            </div>
           </div>
           <div className="d-flex justify-content-end mt-3 mb-3">
             <Button name="Guardar Billetes" onClick={_saveBills} />
@@ -260,83 +276,99 @@ const CountCash = (props) => {
       <div className="divider"></div>
 
       {isEditCoins ? (
-        <div className="row mb-5">
-          <div className="d-flex justify-content-between">
-            <Input
-              value={coins.coins20}
-              onChange={(coins20) =>
-                setCoins({
-                  ...coins,
-                  coins20,
-                })
-              }
-              title="Moneda $20"
-            />
-
-            <Input
-              value={coins.coins10}
-              onChange={(coins10) =>
-                setCoins({
-                  ...coins,
-                  coins10,
-                })
-              }
-              title="Moneda $10"
-            />
-
-            <Input
-              value={coins.coins5}
-              onChange={(coins5) =>
-                setCoins({
-                  ...coins,
-                  coins5,
-                })
-              }
-              title="Moneda $5"
-            />
-            <Input
-              value={coins.coins2}
-              onChange={(coins2) =>
-                setCoins({
-                  ...coins,
-                  coins2,
-                })
-              }
-              title="Moneda $2"
-            />
-
-            <Input
-              value={coins.coins1}
-              onChange={(coins1) =>
-                setCoins({
-                  ...coins,
-                  coins1,
-                })
-              }
-              title="Moneda $1"
-            />
-
-            <Input
-              value={coins.coins05}
-              onChange={(coins05) =>
-                setCoins({
-                  ...coins,
-                  coins05,
-                })
-              }
-              title="Moneda $0.50"
-            />
-
-            <Input
-              value={coins.other}
-              onChange={(other) =>
-                setCoins({
-                  ...coins,
-                  other,
-                })
-              }
-              title="Otro"
-            />
+        <div className="col">
+          <div className="row">
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins20}
+                onChange={(coins20) =>
+                  setCoins({
+                    ...coins,
+                    coins20,
+                  })
+                }
+                type="number"
+                title="Moneda $20"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins10}
+                onChange={(coins10) =>
+                  setCoins({
+                    ...coins,
+                    coins10,
+                  })
+                }
+                type="number"
+                title="Moneda $10"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins5}
+                onChange={(coins5) =>
+                  setCoins({
+                    ...coins,
+                    coins5,
+                  })
+                }
+                type="number"
+                title="Moneda $5"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins2}
+                onChange={(coins2) =>
+                  setCoins({
+                    ...coins,
+                    coins2,
+                  })
+                }
+                type="number"
+                title="Moneda $2"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins1}
+                onChange={(coins1) =>
+                  setCoins({
+                    ...coins,
+                    coins1,
+                  })
+                }
+                type="number"
+                title="Moneda $1"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.coins05}
+                onChange={(coins05) =>
+                  setCoins({
+                    ...coins,
+                    coins05,
+                  })
+                }
+                type="number"
+                title="Moneda $0.50"
+              />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-2">
+              <Input
+                value={coins.other}
+                onChange={(other) =>
+                  setCoins({
+                    ...coins,
+                    other,
+                  })
+                }
+                type="number"
+                title="Otro"
+              />
+            </div>
           </div>
 
           <div className="d-flex justify-content-end mt-3">

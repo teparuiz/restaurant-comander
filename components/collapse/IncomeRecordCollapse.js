@@ -57,23 +57,24 @@ const IncomeRecordCollapse = () => {
   return (
     <div className="container_table_card">
       <h3> Ingresos</h3>
-
-      <div className="d-flex">
-        {getIncome.map((i, idx) => (
-          <IncomeCard
-            description={findList(payMethod, i.description)}
-            total={i.total}
-            key={idx}
-            trash={() => _trash(idx)}
-            onEdit={() => setVisible({ visible: true, data: i })}
+      <div className="row">
+        <div className="d-flex">
+          {getIncome.map((i, idx) => (
+            <IncomeCard
+              description={findList(payMethod, i.description)}
+              total={i.total}
+              key={idx}
+              trash={() => _trash(idx)}
+              onEdit={() => setVisible({ visible: true, data: i })}
+            />
+          ))}
+        </div>
+        <div className="d-flex justify-content-end">
+          <Button
+            name="Añadir ingreso"
+            onClick={() => setVisible({ visible: true, data: false })}
           />
-        ))}
-      </div>
-      <div className="d-flex justify-content-end">
-        <Button
-          name="Añadir ingreso"
-          onClick={() => setVisible({ visible: true, data: false })}
-        />
+        </div>
       </div>
       <ModalIncome
         visible={visible.visible}

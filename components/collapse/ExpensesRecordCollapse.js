@@ -47,16 +47,17 @@ const ExpensesRecordCollapse = (props) => {
   return (
     <div className="container_table_card">
       <h3>Egresos</h3>
-      <div className="d-flex">
+      <div className="row">
         {getExpense.map((item, index) => (
-          <ExpenseCard
-            total={item.total}
-            provider={item.provider}
-            description={item.description}
-            key={index}
-            trash={() => _trash(index)}
-            onEdit={() => setVisible({ visible: true, data: item })}
-          />
+          <div className="col-3" key={index}>
+            <ExpenseCard
+              total={item.total}
+              provider={item.provider}
+              description={item.description}
+              trash={() => _trash(index)}
+              onEdit={() => setVisible({ visible: true, data: item })}
+            />
+          </div>
         ))}
       </div>
       <div className="d-flex justify-content-end">

@@ -11,7 +11,7 @@ const ExpenseCard = (props) => {
   const { description = "", provider, total = "$1,000", trash, onEdit } = props;
 
   return (
-    <div className="p-2">
+    <div className=" p-2">
       <Card
         title={provider}
         bordered={true}
@@ -21,7 +21,6 @@ const ExpenseCard = (props) => {
         ]}
       >
         <p>
-          {" "}
           <b>{description}</b>
         </p>
         <p>$ {total}</p>

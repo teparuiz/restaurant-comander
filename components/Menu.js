@@ -27,12 +27,12 @@ const MenuComponent = (props) => {
       label: "Corte de caja",
       path: "/cashcut",
     },
-    {
-      key: "3",
-      icon: <SettingOutlined />,
-      label: "Configuración",
-      path: "/settings",
-    },
+    // {
+    //   key: "3",
+    //   icon: <SettingOutlined />,
+    //   label: "Configuración",
+    //   path: "/settings",
+    // },
   ];
 
   const handleMenuClick = (value) => {

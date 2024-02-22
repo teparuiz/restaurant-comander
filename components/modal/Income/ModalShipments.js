@@ -53,7 +53,7 @@ const ModalShipments = (props) => {
         value={user}
         onChange={setUser}
       />
-      <Input title="Total" value={total} onChange={setTotal} />
+      <Input title="Total" value={total} onChange={setTotal} type='number' />
       <div className="divider"></div>
       <div className="d-flex justify-content-between">
         <Space>

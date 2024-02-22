@@ -1,7 +1,11 @@
 import React from "react";
 import { getSession } from "next-auth/client";
 import { HTTP } from "/config/http";
-import { validationSessionUser } from "@teparuiz69/config/utils";
+import {
+  handleError,
+  handleSuccess,
+  validationSessionUser,
+} from "@teparuiz69/config/utils";
 import SalesRecordCollapse from "@teparuiz69/components/collapse/SalesRecordCollapse";
 import IncomeRecordCollapse from "@teparuiz69/components/collapse/IncomeRecordCollapse";
 import ExpensesRecordCollapse from "@teparuiz69/components/collapse/ExpensesRecordCollapse";
@@ -12,8 +16,10 @@ import { useCashCut } from "@teparuiz69/context/cashcut-context";
 import { HTTP_REQUEST } from "@teparuiz69/config/http";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useRouter } from "next/router";
 
 const NewCashCut = (props) => {
+  const router = useRouter();
   const {
     getTickets,
     getShipments,
@@ -23,7 +29,6 @@ const NewCashCut = (props) => {
     getIncome,
     getTotalCash,
   } = useCashCut();
-
 
   const _save = () => {
     const getCredit = getIncome
@@ -39,7 +44,7 @@ const NewCashCut = (props) => {
       diffCashCredit: getTotalCash - getCredit,
       cash: getTotalCash,
       kyteSells: parseFloat(getSales.salesRecord),
-      date: dayjs(new Date()).format('YYYY-MM-DD'),
+      date: dayjs(new Date()).format("YYYY-MM-DD"),
       shipments: getShipments,
       incomes: getIncome,
       expenses: getExpense,
@@ -48,10 +53,12 @@ const NewCashCut = (props) => {
     };
 
     HTTP("POST", `/api/v1/cash-cut`, obj)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+      .then((response) => {
+        handleSuccess("Se ha guardado con exito el corte de caja");
+        router.push("/cashcut");
+      })
+      .catch((err) => handleError("Ha sucedido un error con el servidor"));
   };
-
 
   const _summaryExpense = () => {
     const expenses = getExpense.reduce((a, b) => a + parseFloat(b.total), 0);
@@ -63,7 +70,6 @@ const NewCashCut = (props) => {
     const incomes = getIncome.reduce((a, b) => a + parseFloat(b.total), 0);
     return incomes;
   };
-
 
   return (
     <div>
@@ -99,7 +105,7 @@ const NewCashCut = (props) => {
               Ingresos:<b>$ {_summaryIncome()}</b>{" "}
             </h5>
             <h5>
-              Efectivo total: <b> $ {getTotalCash} </b> 
+              Efectivo total: <b> $ {getTotalCash} </b>
             </h5>
             <h5>
               Caja: <b>$ {getSales.endCash}</b>
